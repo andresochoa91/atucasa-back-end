@@ -71,6 +71,16 @@ class UsersController < ApplicationController
   end
 
   def destroy
+    if @user
+      if @user.role == "merchant"      
+        Merchant.find_by(user_id: @user.id).destroy
+      elsif @user.role == "customer"
+        Customer.find_by(user_id: @user.id).destroy
+      else
+        Admin.find_by(user_id: @user.id).destroy
+      end
+    end
+
     if @user.destroy
       render json: {
         status: 200,
