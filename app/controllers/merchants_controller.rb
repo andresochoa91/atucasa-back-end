@@ -1,5 +1,4 @@
 class MerchantsController < ApplicationController
-
   before_action :set_merchant, only: [:show, :update]
 
   def show

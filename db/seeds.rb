@@ -6,51 +6,93 @@
 #   movies = Movie.create([{ name: 'Star Wars' }, { name: 'Lord of the Rings' }])
 #   Character.create(name: 'Luke', movie: movies.first)
 
+locations = Location.create([
+  {
+    country: "USA",
+    state: "CA",
+    city: "San Francisco"
+  },
+  {
+    country: "USA",
+    state: "CA",
+    city: "San Jose"
+  },
+  {
+    country: "USA",
+    state: "NC",
+    city: "Durham"
+  },
+  {
+    country: "USA",
+    state: "NC",
+    city: "Raleigh"
+  },
+  {
+    country: "Colombia",
+    state: "Antioquia",
+    city: "Medellin"
+  },
+  {
+    country: "Colombia",
+    state: "Bogota",
+    city: "Bogota"
+  },
+])
+
 users = User.create([
   {
     phone: 123456789,
     email: "a@b.com",
-    role: "merchant"
+    role: "merchant",
+    location_id: 1
   },
   {
     phone: 456789123,
     email: "b@b.com",
-    role: "merchant"
+    role: "merchant",
+    location_id: 2
   },
   {
     phone: 123654789,
     email: "c@b.com",
-    role: "merchant"
+    role: "merchant",
+    location_id: 3
   },
   {
     phone: 456789123,
     email: "d@b.com",
-    role: "customer"
+    role: "customer",
+    location_id: 4
   },
   {
     phone: 78945613,
     email: "e@b.com",
-    role: "customer"
+    role: "customer",
+    location_id: 5
   },
   {
     phone: 321654987,
     email: "f@b.com",
-    role: "customer"
+    role: "customer",
+    location_id: 6
   },
   {
     phone: 654321987,
     email: "g@b.com",
-    role: "admin"
+    role: "admin",
+    location_id: 1
   },
   {
     phone: 987456321,
     email: "h@b.com",
-    role: "admin"
+    role: "admin",
+    location_id: 2
   },
   {
     phone: 789564321,
     email: "i@b.com",
-    role: "admin"
+    role: "admin",
+    location_id: 3
   }
 ])
 
