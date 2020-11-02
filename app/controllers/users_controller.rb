@@ -1,6 +1,6 @@
 class UsersController < ApplicationController
 
-  before_action :set_user, only: [:show, :destroy]
+  before_action :set_user, only: [:show, :update, :destroy]
 
   def index
     @users = User.all
@@ -60,14 +60,17 @@ class UsersController < ApplicationController
     end
   end
 
-  def update
-    if @user.update(user_params)
+  def update    
+
+    if @user.update(user_params_update_only)
       render json: {
         status: 200,
         message: "User updated",
-        user: @user
+        user: @user,
+        role_info: role_params
       }
     end
+
   end
 
   def destroy
@@ -97,6 +100,10 @@ class UsersController < ApplicationController
 
     def user_params
       params.require(:user).permit(:phone, :email, :role)
+    end
+
+    def user_params_update_only
+      params.require(:user).permit(:phone, :email)
     end
 
 end
