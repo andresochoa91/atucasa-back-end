@@ -26,10 +26,13 @@ class UsersController < ApplicationController
   def create
     @user = User.new(user_params("create"))
     if @user.save
+
       if @user[:role] == "customer"
-        @user.customer = Customer.create(username: (@user[:email].split("@")[0]).parameterize)
+        @customer = Customer.new()
+        @user.customer = @customer
       else
-        @user.merchant = Merchant.create(merchant_name: (@user[:email].split("@")[0]).parameterize)
+        @merchant = Merchant.new()
+        @user.merchant = @merchant
       end
 
       render ({
@@ -70,6 +73,9 @@ class UsersController < ApplicationController
   end
 
   def destroy
+    @user.customer.destroy if @user.customer
+    @user.merchant.destroy if @user.merchant
+
     if @user.destroy
       render ({
         json: {
@@ -99,4 +105,5 @@ class UsersController < ApplicationController
         params.permit(:email, :password, :password_confirmation, :role) :
         params.permit(:email, :password)
     end
+
 end
