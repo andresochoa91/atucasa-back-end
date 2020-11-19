@@ -5,9 +5,7 @@ class ApplicationController < ActionController::API
     token = cookies.signed[:jwt]
     decoded_token = CoreModules::JsonWebToken.decode(token)
     if decoded_token
-      if decoded_token[:username]
-        user = Customer.find_by(id: decoded_token[:customer_id])
-      end
+      user = User.find_by(id: decoded_token[:user_id])
     end
     if user then return true else render json: {status: 'unauthorized', code: 401} end
   end
@@ -16,7 +14,7 @@ class ApplicationController < ActionController::API
     token = cookies.signed[:jwt]
     decoded_token = CoreModules::JsonWebToken.decode(token)
     if decoded_token
-      user = Customer.find_by(id: decoded_token[:customer_id])
+      user = User.find_by(id: decoded_token[:user_id])
     end
     if user then return user else return false end
   end

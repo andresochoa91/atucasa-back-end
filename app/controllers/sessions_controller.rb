@@ -17,7 +17,7 @@ class SessionsController < ApplicationController
     email = params["email"]
     password = params["password"]
     if email && password
-      login_hash = Customer.handle_login(email, password)
+      login_hash = User.handle_login(email, password)
       if login_hash
         cookies.signed[:jwt] = {value: login_hash[:token], httponly: true}
         render json: login_hash

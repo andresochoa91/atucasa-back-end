@@ -1,13 +1,13 @@
-class CustomersController < ApplicationController
+class UsersController < ApplicationController
 
-  before_action :set_customer, only: [:show, :update, :destroy]
+  before_action :set_user, only: [:show, :update, :destroy]
 
   def index
-    @customers = Customer.all
+    @users = User.all
     render ({
       json: {
         message: "Success",
-        customers: @customers
+        users: @users
       },
       status: 200
     })
@@ -17,19 +17,20 @@ class CustomersController < ApplicationController
     render ({
       json: {
         message: "Success",
-        customer: @customer
+        user: @user
       },
       status: 200
     })
   end
 
   def create
-    @customer = Customer.new(customer_params)
-    if @customer.save
+    @user = User.new(user_params("create"))
+    if @user.save
+      @user.merchant = Merchant.create(merchant_name: "johan")
       render ({
         json: {
           message: "User created successfully",
-          customer: @customer
+          user: @user
         },
         status: 201
       })
@@ -44,12 +45,12 @@ class CustomersController < ApplicationController
   end
 
   def update
-    # puts @customer.password
-    if @customer.update(customer_params)
+    # puts @user.password
+    if @user.update(user_params("update"))
       render ({
         json: {
           message: "User updated successfully",
-          customer: @customer
+          user: @user
         },
         status: 200
       })
@@ -64,11 +65,11 @@ class CustomersController < ApplicationController
   end
 
   def destroy
-    if @customer.destroy
+    if @user.destroy
       render ({
         json: {
           message: "User deleted successfully",
-          customer: @customer
+          user: @user
         },
         status: 200
       })
@@ -84,12 +85,14 @@ class CustomersController < ApplicationController
 
   private
 
-    def set_customer
-      @customer = Customer.find(params[:id])
+    def set_user
+      @user = User.find(params[:id])
     end
 
-    def customer_params
-      params.permit(:username, :email, :password, :password_confirmation, :location, :phone_number)
+    def user_params(act)
+      return act == "create" ?
+        params.permit(:email, :password, :password_confirmation, :role) :
+        params.permit(:email, :password)
     end
 
 end

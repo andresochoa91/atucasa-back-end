@@ -2,14 +2,10 @@
 
 one:
   username: MyString
-  email: MyString
-  password_digest: MyString
-  phone_number: MyString
+  phone_number: 1
   location: MyString
 
 two:
   username: MyString
-  email: MyString
-  password_digest: MyString
-  phone_number: MyString
+  phone_number: 1
   location: MyString
