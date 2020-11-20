@@ -24,4 +24,8 @@ class Merchant < ApplicationRecord
 
   puts self
 
+  # if self.merchant_name.present?
+  #   self.slug = merchant_name.parameterize
+  # end
+
 end
