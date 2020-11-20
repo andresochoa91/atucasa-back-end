@@ -22,7 +22,7 @@ class Merchant < ApplicationRecord
     allow_nil: true,
     on: :update
 
-  puts self
+  # puts :user
 
   # if self.merchant_name.present?
   #   self.slug = merchant_name.parameterize

@@ -23,8 +23,11 @@ class CustomersController < ApplicationController
   end
 
   def update
-    # puts @customer.password
-    if @customer.update(customer_params)
+    puts params[:username].present?
+    if @customer.update(customer_params)  
+
+      @customer.update(slug: @customer.username.parameterize) if params[:username].present?
+      
       render ({
         json: {
           message: "Customer updated successfully",

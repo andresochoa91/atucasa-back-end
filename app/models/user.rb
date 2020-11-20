@@ -28,7 +28,6 @@ class User < ApplicationRecord
   validates :role,
     inclusion: {in: %w(customer merchant)}
 
-
   def self.handle_login(email, password)
     user = User.find_by(email: email.downcase)
     if user&.authenticate(password)
