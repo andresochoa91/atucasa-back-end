@@ -14,8 +14,7 @@ class Customer < ApplicationRecord
     allow_nil: true,
     on: :update
 
-
-  puts self
+  
   # if self.username.present?
   #   self.slug = username.parameterize
   # end
