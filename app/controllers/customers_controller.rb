@@ -25,8 +25,16 @@ class CustomersController < ApplicationController
   def update
     if @customer.update(customer_params)  
 
-      @customer.update(slug: @customer.username.parameterize) if params[:username].present?
-      
+      if params[:username].present?
+        slug = @customer.username.parameterize
+
+        while Customer.find_by(slug: slug) && @customer.slug != slug
+          slug += rand(0..9).to_s
+        end
+
+        @customer.update(slug: slug) 
+      end      
+
       render ({
         json: {
           message: "Customer updated successfully",

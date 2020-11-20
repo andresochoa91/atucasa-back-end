@@ -27,11 +27,19 @@ class UsersController < ApplicationController
     @user = User.new(user_params("create"))
     if @user.save
 
+      user_slug = slugify
+
       if @user[:role] == "customer"
-        @customer = Customer.new()
+        @customer = Customer.new(
+          username: user_slug,
+          slug: user_slug
+        )
         @user.customer = @customer
       else
-        @merchant = Merchant.new()
+        @merchant = Merchant.new(
+          merchant_name: user_slug,
+          slug: user_slug
+        )
         @user.merchant = @merchant
       end
 
@@ -104,6 +112,16 @@ class UsersController < ApplicationController
       return act == "create" ?
         params.permit(:email, :password, :password_confirmation, :role) :
         params.permit(:email, :password)
+    end
+
+    def slugify
+      slug = (@user.email.split("@")[0]).parameterize
+
+      while Customer.find_by(slug: slug) || Merchant.find_by(slug: slug)
+        slug += (rand(0..9)).to_s
+      end
+      
+      return slug
     end
 
 end

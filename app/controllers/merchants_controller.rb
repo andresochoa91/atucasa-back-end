@@ -25,7 +25,15 @@ class MerchantsController < ApplicationController
   def update
     if @merchant.update(merchant_params)  
 
-      @merchant.update(slug: @merchant.merchant_name.parameterize) if params[:merchant_name].present?
+      if params[:merchant_name].present?
+        slug = @merchant.merchant_name.parameterize
+
+        while Merchant.find_by(slug: slug) && @merchant.slug != slug
+          slug += rand(0..9).to_s
+        end
+
+        @merchant.update(slug: slug) 
+      end
       
       render ({
         json: {
