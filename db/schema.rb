@@ -17,9 +17,12 @@ ActiveRecord::Schema.define(version: 2020_11_19_191739) do
 
   create_table "customers", force: :cascade do |t|
     t.string "username"
+    t.string "first_name"
+    t.string "last_name"
     t.string "slug"
     t.integer "phone_number"
     t.text "location"
+    t.text "profile_picture"
     t.integer "user_id"
     t.datetime "created_at", precision: 6, null: false
     t.datetime "updated_at", precision: 6, null: false
@@ -31,7 +34,10 @@ ActiveRecord::Schema.define(version: 2020_11_19_191739) do
     t.string "slug"
     t.integer "phone_number"
     t.string "legal_id"
+    t.text "location"
     t.text "description"
+    t.text "profile_picture"
+    t.text "background_picture"
     t.integer "user_id"
     t.datetime "created_at", precision: 6, null: false
     t.datetime "updated_at", precision: 6, null: false
