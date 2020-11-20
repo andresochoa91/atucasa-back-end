@@ -3,13 +3,16 @@ class Customer < ApplicationRecord
   # validates_presence_of :username
   # validates_uniqueness_of :username
 
-  # validates :username,
-  #   length: 3..20,
-  #   uniqueness: true
+  validates :username,
+    length: 3..20,
+    uniqueness: true,
+    allow_nil: true,
+    on: :update
 
-  # validates :phone_number,
-  #   format: { with: /\A\d{10}\z/, message: "bad format" }  
-  #   # allow_nil: true
+  validates :phone_number,
+    format: { with: /\A\d{10}\z/, message: "bad format" },
+    allow_nil: true,
+    on: :update
 
 end
 
