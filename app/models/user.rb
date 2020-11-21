@@ -2,6 +2,7 @@ class User < ApplicationRecord
   has_secure_password
   has_one :customer
   has_one :merchant
+  has_one :location
   validates_presence_of :email, :role
   validates_uniqueness_of :email
 
