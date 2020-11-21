@@ -22,25 +22,29 @@ class ProductsController < ApplicationController
     })
   end
 
-  # def create
-  #   @product = Product.new(product_params)
-  #   if Merchant.find(params[:merchant_id]).products <<
-  #     render ({
-  #       json: {
-  #         message: "Product updated successfully",
-  #         product: @product
-  #       },
-  #       status: 200
-  #     })
-  #   else
-  #     render ({
-  #       json: {
-  #         error: "Unable to create product"
-  #       },
-  #       status: 409
-  #     })
-  #   end
-  # end
+  def create
+    # puts current_user[:user_id]
+    role = current_user[:role]
+    email = current_user[:email]
+    puts role, email, id
+    # @product = Product.new(product_params)
+    # if @product.save
+    #   render ({
+    #     json: {
+    #       message: "Product updated successfully",
+    #       product: @product
+    #     },
+    #     status: 200
+    #   })
+    # else
+    #   render ({
+    #     json: {
+    #       error: "Unable to create product"
+    #     },
+    #     status: 409
+    #   })
+    # end
+  end
 
   def update
     if @product.update(product_params)        

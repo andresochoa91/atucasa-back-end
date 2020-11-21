@@ -4,6 +4,7 @@ Rails.application.routes.draw do
   resources :customers
   resources :merchants
   resources :products
+  
   post "login", to: "sessions#create"
   delete "login", to: "sessions#destroy"
 end
