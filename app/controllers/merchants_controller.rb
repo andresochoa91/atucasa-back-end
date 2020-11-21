@@ -59,6 +59,6 @@ class MerchantsController < ApplicationController
     end
 
     def merchant_params
-      params.permit(:merchant_name, :phone_number, :legal_id, :description)
+      params.permit(:merchant_name, :phone_number, :legal_id, :description, :profile_picture, :background_picture)
     end
 end
