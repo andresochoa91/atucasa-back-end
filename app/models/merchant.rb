@@ -1,5 +1,6 @@
 class Merchant < ApplicationRecord
   belongs_to :user
+  has_many :products
 
   validates :merchant_name,
     length: { minimum: 3 },
@@ -19,6 +20,11 @@ class Merchant < ApplicationRecord
 
   validates :description,
     length: 20..400,
+    allow_nil: true,
+    on: :update
+
+  validates :profile_picture, :background_picture,
+    format: { with: /\Ahttps?:\/\/.{0,}/, message: "bad format" },
     allow_nil: true,
     on: :update
 
