@@ -23,38 +23,44 @@ class ProductsController < ApplicationController
   end
 
   def create
-    # puts current_user[:user_id]
-    role = current_user[:role]
-    email = current_user[:email]
-    puts role, email, id
-    # @product = Product.new(product_params)
-    # if @product.save
-    #   render ({
-    #     json: {
-    #       message: "Product updated successfully",
-    #       product: @product
-    #     },
-    #     status: 200
-    #   })
-    # else
-    #   render ({
-    #     json: {
-    #       error: "Unable to create product"
-    #     },
-    #     status: 409
-    #   })
-    # end
-  end
-
-  def update
-    if @product.update(product_params)        
+    @product = Product.new(product_params)
+    
+    if current_user.merchant.products << @product
       render ({
         json: {
-          message: "Product updated successfully",
+          message: "Product created successfully",
           product: @product
         },
         status: 200
       })
+    else
+      render ({
+        json: {
+          error: "Unable to create product"
+        },
+        status: 409
+      })
+    end
+  end
+
+  def update
+    if current_user.merchant.products.find(@product.id)
+      if @product.update(product_params)        
+        render ({
+          json: {
+            message: "Product updated successfully",
+            product: @product
+          },
+          status: 200
+        })
+      else
+        render ({
+          json: {
+            error: "Bad request"
+          },
+          status: 422 #unprocessable entity
+        })
+      end
     else
       render ({
         json: {
@@ -66,20 +72,29 @@ class ProductsController < ApplicationController
   end
 
   def destroy
-    if @product.destroy
-      render ({
-        json: {
-          message: "Product deleted successfully",
-          product: @product
-        },
-        status: 200
-      })
+    if current_user.merchant.products.find(@product.id)
+      if @product.destroy
+        render ({
+          json: {
+            message: "Product deleted successfully",
+            product: @product
+          },
+          status: 200
+        })
+      else
+        render ({
+          json: {
+            error: "Unable to delete product"
+          },
+          status: 401 #unauthorized 
+        })
+      end
     else
       render ({
         json: {
-          error: "Unable to delete product"
+          error: "Bad request"
         },
-        status: 401 #unauthorized 
+        status: 422 #unprocessable entity
       })
     end
   end

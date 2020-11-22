@@ -3,11 +3,13 @@ class UsersController < ApplicationController
   before_action :set_user, only: [:show, :update, :destroy]
 
   def index
+    # puts current_user.inspect
+    # puts current_user.merchant.inspect
     @users = User.all
     render json: {
-        message: "Success",
-        users: @users
-      }
+      message: "Success",
+      users: @users
+    }
   end
 
   def show
