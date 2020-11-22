@@ -25,5 +25,15 @@ module Atupuerta
     config.autoload_paths += %W( lib/ )
     config.api_only = true
     config.middleware.use ActionDispatch::Cookies
+
+    config.middleware.insert_before 0, Rack::Cors, debug: true do
+      allow do
+        origins '*'
+        resource '*', 
+          headers: :any,
+          methods: [:get, :post, :put, :patch, :delete, :options, :head]
+      end
+    end
+
   end
 end
