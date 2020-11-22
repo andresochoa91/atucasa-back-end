@@ -4,13 +4,10 @@ class UsersController < ApplicationController
 
   def index
     @users = User.all
-    render ({
-      json: {
+    render json: {
         message: "Success",
         users: @users
-      },
-      status: 200
-    })
+      }
   end
 
   def show
