@@ -61,14 +61,25 @@ class UsersController < ApplicationController
 
   def update
     # puts @user.password
-    if @user.update(user_params("update"))
-      render ({
-        json: {
-          message: "User updated successfully",
-          user: @user
-        },
-        status: 200
-      })
+    # puts current_user.id
+    # puts @user.id
+    if (current_user.id == @user.id)
+      if @user.update(user_params("update"))
+        render ({
+          json: {
+            message: "User updated successfully",
+            user: @user
+          },
+          status: 200
+        })
+      else
+        render ({
+          json: {
+            error: "Bad request"
+          },
+          status: 422 #unprocessable entity
+        })
+      end
     else
       render ({
         json: {
@@ -80,17 +91,27 @@ class UsersController < ApplicationController
   end
 
   def destroy
-    @user.customer.destroy if @user.customer
-    @user.merchant.destroy if @user.merchant
-
-    if @user.destroy
-      render ({
-        json: {
-          message: "User deleted successfully",
-          user: @user
-        },
-        status: 200
-      })
+    if (current_user.id == @user.id)
+      @user.merchant.products.destroy_all if @user.merchant
+      @user.customer.destroy if @user.customer
+      @user.merchant.destroy if @user.merchant
+  
+      if @user.destroy
+        render ({
+          json: {
+            message: "User deleted successfully",
+            user: @user
+          },
+          status: 200
+        })
+      else
+        render ({
+          json: {
+            error: "Unable to delete user"
+          },
+          status: 401 #unauthorized 
+        })
+      end
     else
       render ({
         json: {
