@@ -23,25 +23,34 @@ class CustomersController < ApplicationController
   end
 
   def update
-    if @customer.update(customer_params)  
-
-      if params[:username].present?
-        slug = @customer.username.parameterize
-
-        while Customer.find_by(slug: slug) && @customer.slug != slug
-          slug += rand(0..9).to_s
-        end
-
-        @customer.update(slug: slug) 
-      end      
-
-      render ({
-        json: {
-          message: "Customer updated successfully",
-          customer: @customer
-        },
-        status: 200
-      })
+    if (current_user.customer == @customer)
+      if @customer.update(customer_params)  
+  
+        if params[:username].present?
+          slug = @customer.username.parameterize
+  
+          while Customer.find_by(slug: slug) && @customer.slug != slug
+            slug += rand(0..9).to_s
+          end
+  
+          @customer.update(slug: slug) 
+        end      
+  
+        render ({
+          json: {
+            message: "Customer updated successfully",
+            customer: @customer
+          },
+          status: 200
+        })
+      else
+        render ({
+          json: {
+            error: "Bad request"
+          },
+          status: 422 #unprocessable entity
+        })
+      end
     else
       render ({
         json: {
