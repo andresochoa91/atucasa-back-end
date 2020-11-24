@@ -23,25 +23,34 @@ class MerchantsController < ApplicationController
   end
 
   def update
-    if @merchant.update(merchant_params)  
-
-      if params[:merchant_name].present?
-        slug = @merchant.merchant_name.parameterize
-
-        while Merchant.find_by(slug: slug) && @merchant.slug != slug
-          slug += rand(0..9).to_s
+    if (current_user.merchant == @merchant)
+      if @merchant.update(merchant_params)  
+  
+        if params[:merchant_name].present?
+          slug = @merchant.merchant_name.parameterize
+  
+          while Merchant.find_by(slug: slug) && @merchant.slug != slug
+            slug += rand(0..9).to_s
+          end
+  
+          @merchant.update(slug: slug) 
         end
-
-        @merchant.update(slug: slug) 
+        
+        render ({
+          json: {
+            message: "Merchant updated successfully",
+            merchant: @merchant
+          },
+          status: 200
+        })
+      else
+        render ({
+          json: {
+            error: "Bad request"
+          },
+          status: 422 #unprocessable entity
+        })
       end
-      
-      render ({
-        json: {
-          message: "Merchant updated successfully",
-          merchant: @merchant
-        },
-        status: 200
-      })
     else
       render ({
         json: {

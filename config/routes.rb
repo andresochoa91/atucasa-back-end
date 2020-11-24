@@ -7,4 +7,7 @@ Rails.application.routes.draw do
   
   post "login", to: "sessions#create"
   delete "login", to: "sessions#destroy"
+
+  get '/users/:user_id/location', to: "locations#show"
+  put '/users/:user_id/location', to: "locations#update"
 end
