@@ -25,6 +25,7 @@ class UsersController < ApplicationController
   def create
     @user = User.new(user_params("create"))
     if @user.save
+      @user.location = Location.create()
 
       user_slug = slugify
 
@@ -92,6 +93,7 @@ class UsersController < ApplicationController
 
   def destroy
     if (current_user.id == @user.id)
+      @user.location.destroy
       @user.merchant.products.destroy_all if @user.merchant
       @user.customer.destroy if @user.customer
       @user.merchant.destroy if @user.merchant
