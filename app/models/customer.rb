@@ -1,5 +1,6 @@
 class Customer < ApplicationRecord
   belongs_to :user
+  has_many :orders
   # validates_presence_of :username
   # validates_uniqueness_of :username
 
