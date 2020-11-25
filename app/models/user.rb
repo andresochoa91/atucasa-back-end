@@ -6,6 +6,9 @@ class User < ApplicationRecord
   validates_presence_of :email, :role
   validates_uniqueness_of :email
 
+  before_destroy :delete_user_customer_or_merchant_and_location
+  after_create :create_merchant_or_customer_and_location
+
   validates :email,
     format: { with: /\A(.+)@(.+)\z/, message: "Email invalid" },
     uniqueness: { case_sensitive: false },
@@ -47,4 +50,41 @@ class User < ApplicationRecord
     end
   end
 
+  private 
+    def delete_user_customer_or_merchant_and_location
+      location.destroy
+      merchant.products.destroy_all if merchant
+      customer.destroy if customer
+      merchant.destroy if merchant
+    end
+
+    def create_merchant_or_customer_and_location
+      self.location = Location.create()
+
+      user_slug = slugify
+
+      if role == "customer"
+        @customer = Customer.new(
+          username: user_slug,
+          slug: user_slug
+        )
+        self.customer = @customer
+      else
+        @merchant = Merchant.new(
+          merchant_name: user_slug,
+          slug: user_slug
+        )
+        self.merchant = @merchant
+      end
+    end
+
+    def slugify
+      slug = (email.split("@")[0]).parameterize
+
+      while Customer.find_by(slug: slug) || Merchant.find_by(slug: slug)
+        slug += (rand(0..9)).to_s
+      end
+      
+      return slug
+    end
 end

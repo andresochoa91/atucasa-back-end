@@ -25,23 +25,23 @@ class UsersController < ApplicationController
   def create
     @user = User.new(user_params("create"))
     if @user.save
-      @user.location = Location.create()
+      # @user.location = Location.create()
 
-      user_slug = slugify
+      # user_slug = slugify
 
-      if @user[:role] == "customer"
-        @customer = Customer.new(
-          username: user_slug,
-          slug: user_slug
-        )
-        @user.customer = @customer
-      else
-        @merchant = Merchant.new(
-          merchant_name: user_slug,
-          slug: user_slug
-        )
-        @user.merchant = @merchant
-      end
+      # if @user[:role] == "customer"
+      #   @customer = Customer.new(
+      #     username: user_slug,
+      #     slug: user_slug
+      #   )
+      #   @user.customer = @customer
+      # else
+      #   @merchant = Merchant.new(
+      #     merchant_name: user_slug,
+      #     slug: user_slug
+      #   )
+      #   @user.merchant = @merchant
+      # end
 
       render ({
         json: {
@@ -93,10 +93,11 @@ class UsersController < ApplicationController
 
   def destroy
     if (current_user.id == @user.id)
-      @user.location.destroy
-      @user.merchant.products.destroy_all if @user.merchant
-      @user.customer.destroy if @user.customer
-      @user.merchant.destroy if @user.merchant
+      cookies.delete(:jwt)
+      # @user.location.destroy
+      # @user.merchant.products.destroy_all if @user.merchant
+      # @user.customer.destroy if @user.customer
+      # @user.merchant.destroy if @user.merchant
   
       if @user.destroy
         render ({
@@ -127,7 +128,7 @@ class UsersController < ApplicationController
   private
 
     def set_user
-      @user = User.find(params[:id])
+      @user = User.find(.])
     end
 
     def user_params(act)
@@ -136,14 +137,14 @@ class UsersController < ApplicationController
         params.permit(:email, :password)
     end
 
-    def slugify
-      slug = (@user.email.split("@")[0]).parameterize
+    # def slugify
+    #   slug = (@user.email.split("@")[0]).parameterize
 
-      while Customer.find_by(slug: slug) || Merchant.find_by(slug: slug)
-        slug += (rand(0..9)).to_s
-      end
+    #   while Customer.find_by(slug: slug) || Merchant.find_by(slug: slug)
+    #     slug += (rand(0..9)).to_s
+    #   end
       
-      return slug
-    end
+    #   return slug
+    # end
 
 end

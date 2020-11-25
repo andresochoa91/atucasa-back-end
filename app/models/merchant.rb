@@ -1,6 +1,7 @@
 class Merchant < ApplicationRecord
   belongs_to :user
   has_many :products
+  has_many :links
 
   validates :merchant_name,
     length: { minimum: 3 },
