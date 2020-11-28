@@ -5,9 +5,12 @@ Rails.application.routes.draw do
   resources :merchants
   resources :products
   resources :links
-  
+
+  get '/current_user', to: 'users#show'
+  post '/sign_up', to: 'users#create'
+
   post "login", to: "sessions#create"
-  delete "login", to: "sessions#destroy"
+  delete "logout", to: "sessions#destroy"
 
   get '/users/:user_id/location', to: "locations#show"
   put '/users/:user_id/location', to: "locations#update"

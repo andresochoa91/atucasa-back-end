@@ -1,55 +1,87 @@
 class UsersController < ApplicationController
 
-  before_action :set_user, only: [:show, :update, :destroy]
+  # before_action :set_user, only: [:show, :update, :destroy]
 
-  def index
-    # puts current_user.inspect
-    # puts current_user.merchant.inspect
-    @users = User.all
-    render json: {
-      message: "Success",
-      users: @users
-    }
-  end
+  # def index
+  #   # puts current_user.inspect
+  #   # puts current_user.merchant.inspect
+  #   if current_user
+  #     render ({
+  #       json: {
+  #         message: "Success",
+  #         users: current_user
+  #       },
+  #       status: 200
+  #     })
+  #   else
+  #     render ({
+  #       json: {
+  #         error: "Not found"
+  #       },
+  #       status: 404
+  #     })
+  #   end
+  # end
 
   def show
-    render ({
-      json: {
-        message: "Success",
-        user: @user
-      },
-      status: 200
-    })
+    if current_user
+      render ({
+        json: {
+          message: "Success",
+          users: current_user
+        },
+        status: 200
+      })
+    else
+      render ({
+        json: {
+          error: "Not found"
+        },
+        status: 404
+      })
+    end
   end
 
   def create
-    @user = User.new(user_params("create"))
-    if @user.save
-      # @user.location = Location.create()
+    if !current_user
+      @user = User.new(user_params("create"))
+      if @user.save
+        # @user.location = Location.create()
+  
+        # user_slug = slugify
+  
+        # if @user[:role] == "customer"
+        #   @customer = Customer.new(
+        #     username: user_slug,
+        #     slug: user_slug
+        #   )
+        #   @user.customer = @customer
+        # else
+        #   @merchant = Merchant.new(
+        #     merchant_name: user_slug,
+        #     slug: user_slug
+        #   )
+        #   @user.merchant = @merchant
+        # end
+  
+        login_hash = User.handle_login(params[:email], params[:password])
+        cookies.signed[:jwt] = {value: login_hash[:token], httponly: true}
 
-      # user_slug = slugify
-
-      # if @user[:role] == "customer"
-      #   @customer = Customer.new(
-      #     username: user_slug,
-      #     slug: user_slug
-      #   )
-      #   @user.customer = @customer
-      # else
-      #   @merchant = Merchant.new(
-      #     merchant_name: user_slug,
-      #     slug: user_slug
-      #   )
-      #   @user.merchant = @merchant
-      # end
-
-      render ({
-        json: {
-          message: "User created successfully",
-          user: @user
-        },
-        status: 201
-      })
+        render ({
+          json: {
+            message: "User created successfully",
+            user: @user
+          },
+          status: 201
+        })
+      else
+        render ({
+          json: {
+            error: "Unable to create user"
+          },
+          status: 409
+        })
+      end
     else
       render ({
         json: {
@@ -127,9 +159,9 @@ class UsersController < ApplicationController
 
   private
 
-    def set_user
-      @user = User.find(params[:id])
-    end
+    # def set_user
+    #   @user = User.find(params[:id])
+    # end
 
     def user_params(act)
       return act == "create" ?
