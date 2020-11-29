@@ -93,15 +93,12 @@ class UsersController < ApplicationController
   end
 
   def update
-    # puts @user.password
-    # puts current_user.id
-    # puts @user.id
-    if (current_user.id == @user.id)
-      if @user.update(user_params("update"))
+    if current_user && current_user.authenticate(params[:current_password])
+      if current_user.update(user_params("update"))
         render ({
           json: {
             message: "User updated successfully",
-            user: @user
+            user: current_user
           },
           status: 200
         })
@@ -116,9 +113,9 @@ class UsersController < ApplicationController
     else
       render ({
         json: {
-          error: "Bad request"
+          error: "Not Found"
         },
-        status: 422 #unprocessable entity
+        status: 404
       })
     end
   end
@@ -166,7 +163,7 @@ class UsersController < ApplicationController
     def user_params(act)
       return act == "create" ?
         params.permit(:email, :password, :password_confirmation, :role) :
-        params.permit(:email, :password)
+        params.permit(:email, :password)          
     end
 
     # def slugify
