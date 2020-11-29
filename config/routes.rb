@@ -6,12 +6,13 @@ Rails.application.routes.draw do
   resources :products
   resources :links
 
+  post '/login', to: 'sessions#create'
   get '/current_user', to: 'users#show'
-  post '/sign_up', to: 'users#create'
+  post '/signup', to: 'users#create'
+  put '/current_user', to: 'users#update'
+  delete '/current_user', to: 'sessions#destroy'
 
-  post "login", to: "sessions#create"
-  delete "logout", to: "sessions#destroy"
 
-  get '/users/:user_id/location', to: "locations#show"
-  put '/users/:user_id/location', to: "locations#update"
+  get '/users/:user_id/location', to: 'locations#show'
+  put '/users/:user_id/location', to: 'locations#update'
 end
