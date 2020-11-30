@@ -3,7 +3,7 @@ class CreateMerchants < ActiveRecord::Migration[6.0]
     create_table :merchants do |t|
       t.string :merchant_name
       t.string :slug
-      t.integer :phone_number
+      t.string :phone_number
       t.string :legal_id
       t.text :location
       t.text :description
