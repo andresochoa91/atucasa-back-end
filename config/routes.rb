@@ -17,6 +17,10 @@ Rails.application.routes.draw do
   get '/customer', to: 'customers#show'
   put '/customer', to: 'customers#update'
 
+  #Customer Endpoints
+  get '/merchant', to: 'merchants#show'
+  put '/merchant', to: 'merchants#update'
+
   get '/users/:user_id/location', to: 'locations#show'
   put '/users/:user_id/location', to: 'locations#update'
 end
