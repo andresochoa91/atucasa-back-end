@@ -6,12 +6,16 @@ Rails.application.routes.draw do
   resources :products
   resources :links
 
+  #User Endpoints
   post '/login', to: 'sessions#create'
-  get '/current_user', to: 'users#show'
   post '/signup', to: 'users#create'
+  get '/current_user', to: 'users#show'
   put '/current_user', to: 'users#update'
   delete '/current_user', to: 'sessions#destroy'
 
+  #Customer Endpoints
+  get '/customer', to: 'customers#show'
+  put '/customer', to: 'customers#update'
 
   get '/users/:user_id/location', to: 'locations#show'
   put '/users/:user_id/location', to: 'locations#update'

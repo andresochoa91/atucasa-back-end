@@ -20,7 +20,7 @@ ActiveRecord::Schema.define(version: 2020_11_25_215642) do
     t.string "first_name"
     t.string "last_name"
     t.string "slug"
-    t.integer "phone_number"
+    t.string "phone_number"
     t.text "location"
     t.text "profile_picture"
     t.integer "user_id"
@@ -54,7 +54,7 @@ ActiveRecord::Schema.define(version: 2020_11_25_215642) do
   create_table "merchants", force: :cascade do |t|
     t.string "merchant_name"
     t.string "slug"
-    t.integer "phone_number"
+    t.string "phone_number"
     t.string "legal_id"
     t.text "location"
     t.text "description"
