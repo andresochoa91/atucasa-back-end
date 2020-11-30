@@ -25,11 +25,19 @@ Rails.application.routes.draw do
   get '/current_user/merchant_data', to: 'merchants#show_merchant_data'
   put '/current_user/merchant_data', to: 'merchants#update'
 
-  #Merchant Endpoints
+  #Products Endpoints
   get '/current_user/merchant_data/products', to: 'products#index'
   get '/current_user/merchant_data/products/:id', to: 'products#show'
   post '/current_user/merchant_data/products', to: 'products#create'
   put '/current_user/merchant_data/products/:id', to: 'products#update'
+  delete '/current_user/merchant_data/products/:id', to: 'products#destroy'
+
+  #Products Endpoints
+  get '/current_user/merchant_data/links', to: 'links#index'
+  get '/current_user/merchant_data/links/:id', to: 'links#show'
+  post '/current_user/merchant_data/links', to: 'links#create'
+  put '/current_user/merchant_data/links/:id', to: 'links#update'
+  delete '/current_user/merchant_data/links/:id', to: 'links#destroy'
 
   get '/users/:user_id/location', to: 'locations#show'
   put '/users/:user_id/location', to: 'locations#update'

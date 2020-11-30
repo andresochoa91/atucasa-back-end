@@ -3,24 +3,42 @@ class LinksController < ApplicationController
   before_action :set_link, only: [:show, :update, :destroy]
 
   def index
-    @links = Link.all
-    render ({
-      json: {
-        message: "Success",
-        links: @links
-      },
-      status: 200
-    })
+    if current_user&.merchant
+      @links = current_user.merchant.links
+      render ({
+        json: {
+          message: "Success",
+          links: @links
+        },
+        status: 200
+      })
+    else
+      render ({
+        json: {
+          error: "Not Found",
+        },
+        status: 404
+      })
+    end
   end
 
   def show
-    render ({
-      json: {
-        message: "Success",
-        link: @link
-      },
-      status: 200
-    })
+    if current_user&.merchant.links.find(params[:id])
+      render ({
+        json: {
+          message: "Success",
+          link: @link
+        },
+        status: 200
+      })
+    else
+      render ({
+        json: {
+          error: "Not Found",
+        },
+        status: 404
+      })
+    end
   end
 
   def create

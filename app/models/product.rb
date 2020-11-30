@@ -28,9 +28,9 @@ class Product < ApplicationRecord
     allow_nil: true,
     on: :update
 
-  validates :available,
-    presence: true,
-    on: :create
+  # validates :available,
+  #   presence: true,
+  #   on: :create
 
   validates :product_picture,
     format: { with: /\Ahttps?:\/\/.{0,}/, message: "bad format" },
