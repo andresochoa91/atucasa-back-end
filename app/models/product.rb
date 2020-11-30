@@ -14,7 +14,7 @@ class Product < ApplicationRecord
     on: :update
 
   validates :description,
-    length: 20..400,
+    length: 2..400,
     allow_nil: true,
     on: :update
 
