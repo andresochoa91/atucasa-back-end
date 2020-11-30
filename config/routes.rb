@@ -1,4 +1,9 @@
 Rails.application.routes.draw do
+  get 'orders/index'
+  get 'orders/show'
+  get 'orders/create'
+  get 'orders/update'
+  get 'orders/destroy'
   # For details on the DSL available within this file, see https://guides.rubyonrails.org/routing.html
   resources :users
   resources :customers
@@ -22,6 +27,8 @@ Rails.application.routes.draw do
   put '/current_user/customer_data', to: 'customers#update'
 
   #Merchant Endpoints
+  get '/current_user/customer_data/merchants', to: 'merchants#index'
+  get '/current_user/customer_data/merchants/:id', to: 'merchants#show'
   get '/current_user/merchant_data', to: 'merchants#show_merchant_data'
   put '/current_user/merchant_data', to: 'merchants#update'
 
@@ -32,13 +39,18 @@ Rails.application.routes.draw do
   put '/current_user/merchant_data/products/:id', to: 'products#update'
   delete '/current_user/merchant_data/products/:id', to: 'products#destroy'
 
-  #Products Endpoints
+  #Links Endpoints
   get '/current_user/merchant_data/links', to: 'links#index'
   get '/current_user/merchant_data/links/:id', to: 'links#show'
   post '/current_user/merchant_data/links', to: 'links#create'
   put '/current_user/merchant_data/links/:id', to: 'links#update'
   delete '/current_user/merchant_data/links/:id', to: 'links#destroy'
 
-  get '/users/:user_id/location', to: 'locations#show'
-  put '/users/:user_id/location', to: 'locations#update'
+  #Orders Endpoints
+  get '/current_user/customer_data/merchants/:merchant_id/orders', to: 'orders#index'
+  get '/current_user/customer_data/merchants/:merchant_id/orders/:id', to: 'orders#show'
+  post '/current_user/customer_data/merchants/:merchant_id/orders', to: 'orders#create'
+  # post '/current_user/merchant_data/links', to: 'links#create'
+  # put '/current_user/merchant_data/links/:id', to: 'links#update'
+  # delete '/current_user/merchant_data/links/:id', to: 'links#destroy'
 end
