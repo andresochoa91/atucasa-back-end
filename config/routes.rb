@@ -14,12 +14,12 @@ Rails.application.routes.draw do
   delete '/current_user', to: 'sessions#destroy'
 
   #Customer Endpoints
-  get '/customer', to: 'customers#show'
-  put '/customer', to: 'customers#update'
+  get '/current_user/customer_info', to: 'customers#show'
+  put '/current_user/customer_info', to: 'customers#update'
 
   #Customer Endpoints
-  get '/merchant', to: 'merchants#show'
-  put '/merchant', to: 'merchants#update'
+  get '/current_user/merchant_info', to: 'merchants#show_merchant_info'
+  put '/current_user/merchant_info', to: 'merchants#update'
 
   get '/users/:user_id/location', to: 'locations#show'
   put '/users/:user_id/location', to: 'locations#update'

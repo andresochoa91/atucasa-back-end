@@ -1,18 +1,32 @@
 class MerchantsController < ApplicationController
   before_action :set_merchant, only: [:show, :update]
 
-  # def index
-  #   @merchants = Merchant.all
-  #   render ({
-  #     json: {
-  #       message: "Success",
-  #       merchants: @merchants
-  #     },
-  #     status: 200
-  #   })
-  # end
+  def index
+    @merchants = Merchant.all
+    render ({
+      json: {
+        message: "Success",
+        merchants: @merchants
+      },
+      status: 200
+    })
+  end
 
   def show
+    @merchant = Merchant.find(params[:id])
+    render ({
+      json: {
+        message: "Success",
+        merchant_info: @merchant,
+        products: @merchant.products,
+        links: @merchant.links,
+        email: @merchant.user.email
+      },
+      status: 200
+    })
+  end
+
+  def show_merchant_info
     if current_user&.role == "merchant"
       render ({
         json: {
