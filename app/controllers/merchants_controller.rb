@@ -1,56 +1,55 @@
 class MerchantsController < ApplicationController
   before_action :set_merchant, only: [:show, :update]
 
-  def index
-    @merchants = Merchant.all
-    render ({
-      json: {
-        message: "Success",
-        merchants: @merchants
-      },
-      status: 200
-    })
-  end
+  # def index
+  #   @merchants = Merchant.all
+  #   render ({
+  #     json: {
+  #       message: "Success",
+  #       merchants: @merchants
+  #     },
+  #     status: 200
+  #   })
+  # end
 
   def show
-    render ({
-      json: {
-        message: "Success",
-        merchant: @merchant
-      },
-      status: 200
-    })
+    if current_user&.role == "merchant"
+      render ({
+        json: {
+          message: "Success",
+          customer: set_merchant
+        },
+        status: 200
+      })
+    else
+      render ({
+        json: {
+          error: "Bad request"
+        },
+        status: 422 #unprocessable entity
+      })
+    end
   end
 
   def update
-    if (current_user.merchant == @merchant)
-      if @merchant.update(merchant_params)  
-  
-        if params[:merchant_name].present?
-          slug = @merchant.merchant_name.parameterize
-  
-          while Merchant.find_by(slug: slug) && @merchant.slug != slug
-            slug += rand(0..9).to_s
-          end
-  
-          @merchant.update(slug: slug) 
+    if set_merchant.update(merchant_params)  
+      if params[:merchant_name].present?
+        slug = set_merchant.merchant_name.parameterize
+
+        while Merchant.find_by(slug: slug) && set_merchant.slug != slug
+          slug += rand(0..9).to_s
         end
-        
-        render ({
-          json: {
-            message: "Merchant updated successfully",
-            merchant: @merchant
-          },
-          status: 200
-        })
-      else
-        render ({
-          json: {
-            error: "Bad request"
-          },
-          status: 422 #unprocessable entity
-        })
+
+        set_merchant.update(slug: slug) 
       end
+      
+      render ({
+        json: {
+          message: "Merchant updated successfully",
+          merchant: set_merchant
+        },
+        status: 200
+      })
     else
       render ({
         json: {
@@ -64,7 +63,7 @@ class MerchantsController < ApplicationController
   private
 
     def set_merchant
-      @merchant = Merchant.find(params[:id])
+      current_user.merchant
     end
 
     def merchant_params
