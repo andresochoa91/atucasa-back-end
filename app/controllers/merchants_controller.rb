@@ -1,5 +1,5 @@
 class MerchantsController < ApplicationController
-  before_action :set_merchant, only: [:show, :update]
+  before_action :set_merchant, only: [:show_merchant_data, :update]
 
   def index
     @merchants = Merchant.all
@@ -26,7 +26,7 @@ class MerchantsController < ApplicationController
     })
   end
 
-  def show_merchant_info
+  def show_merchant_data
     if current_user&.role == "merchant"
       render ({
         json: {

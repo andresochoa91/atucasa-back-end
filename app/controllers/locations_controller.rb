@@ -4,40 +4,39 @@ class LocationsController < ApplicationController
 
   def show
     # key_name = use_new_name ? "new name" : "old name"
-
-    render ({
-      json: {
-        message: "Success",
-        location: @location
-        # key_name => true
-      },
-      status: 200
-    })
-  end
-
-  def update
-    if @user == current_user
-      if @location.update(location_params)
-        render ({
-          json: {
-            message: "Location updated successfully",
-            location: @location
-            # key_name => true
-          },
-          status: 200
-        })
-      else
-        render ({
-          json: {
-            error: "Unable to update user",
-          },
-          status: 401 #unauthorized 
-        })
-      end
+    if current_user
+      render ({
+        json: {
+          message: "Success",
+          location: @location
+          # key_name => true
+        },
+        status: 200
+      })
     else
       render ({
         json: {
-          error: "Unable to update user"
+          error: "Not Found",
+        },
+        status: 404  
+      })
+    end
+  end
+
+  def update
+    if @location.update(location_params)
+      render ({
+        json: {
+          message: "Location updated successfully",
+          location: @location
+          # key_name => true
+        },
+        status: 200
+      })
+    else
+      render ({
+        json: {
+          error: "Unable to update user",
         },
         status: 401 #unauthorized 
       })
@@ -46,12 +45,8 @@ class LocationsController < ApplicationController
 
   private
 
-    def set_user
-      @user = User.find(params[:user_id])
-    end
-
     def set_location
-      @location = set_user.location
+      @location = current_user.location
     end
 
     def location_params
