@@ -2,24 +2,42 @@ class ProductsController < ApplicationController
   before_action :set_product, only: [:show, :update, :destroy]
 
   def index
-    @products = Product.all
-    render ({
-      json: {
-        message: "Success",
-        products: @products
-      },
-      status: 200
-    })
+    if current_user&.merchant
+      @products = current_user.merchant.products
+      render ({
+        json: {
+          message: "Success",
+          products: @products
+        },
+        status: 200
+      })
+    else
+      render ({
+        json: {
+          error: "Not Found",
+        },
+        status: 404
+      })
+    end
   end
 
   def show
-    render ({
-      json: {
-        message: "Success",
-        product: @product
-      },
-      status: 200
-    })
+    if current_user&.merchant.products.find(params[:id])
+      render ({
+        json: {
+          message: "Success",
+          product: @product
+        },
+        status: 200
+      })
+    else
+      render ({
+        json: {
+          error: "Not Found",
+        },
+        status: 404
+      })
+    end
   end
 
   def create
@@ -45,6 +63,9 @@ class ProductsController < ApplicationController
 
   def update
     if current_user.merchant.products.find(@product.id)
+      puts "yayayayayayayayaya"
+      puts @product.id
+      puts @product.inspect
       if @product.update(product_params)        
         render ({
           json: {
