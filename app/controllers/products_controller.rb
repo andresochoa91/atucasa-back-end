@@ -42,7 +42,6 @@ class ProductsController < ApplicationController
 
   def create
     @product = Product.new(product_params)
-    
     if current_user.merchant.products << @product
       render ({
         json: {
@@ -63,9 +62,6 @@ class ProductsController < ApplicationController
 
   def update
     if current_user.merchant.products.find(@product.id)
-      puts "yayayayayayayayaya"
-      puts @product.id
-      puts @product.inspect
       if @product.update(product_params)        
         render ({
           json: {
