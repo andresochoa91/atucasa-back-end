@@ -42,6 +42,8 @@ class ProductsController < ApplicationController
 
   def create
     @product = Product.new(product_params)
+    @product.update(tax: @product.price * 0.09)
+
     if current_user.merchant.products << @product
       render ({
         json: {
@@ -62,7 +64,8 @@ class ProductsController < ApplicationController
 
   def update
     if current_user.merchant.products.find(@product.id)
-      if @product.update(product_params)        
+      if @product.update(product_params)
+        @product.update(tax: @product.price * 0.09)        
         render ({
           json: {
             message: "Product updated successfully",

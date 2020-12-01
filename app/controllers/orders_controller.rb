@@ -1,6 +1,9 @@
 class OrdersController < ApplicationController
   def index
-    if @orders ||= current_user.customer.orders
+    if @orders ||= Order.where(
+      customer_id: current_user.customer.id, 
+      merchant_id: params[:merchant_id].to_i      
+    )
       render ({
         json: {
           message: "Success",
@@ -29,7 +32,8 @@ class OrdersController < ApplicationController
       render ({
         json: {
           message: "Success",
-          order: @order
+          order: @order,
+          products_order: @order.product_orders
         },
         status: 200
       })
@@ -60,6 +64,7 @@ class OrdersController < ApplicationController
             product_id: product[:id],
             product_name: Product.find(product[:id]).product_name,
             price: Product.find(product[:id]).price,
+            tax: Product.find(product[:id]).tax,
             amount: product[:amount]
           ) 
           @order.product_orders << new_product

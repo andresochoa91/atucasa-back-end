@@ -6,6 +6,7 @@ class CreateProducts < ActiveRecord::Migration[6.0]
       t.float :price
       t.boolean :available
       t.string :product_picture
+      t.float :tax
       t.integer :merchant_id
 
       t.timestamps
