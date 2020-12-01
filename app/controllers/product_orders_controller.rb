@@ -80,11 +80,10 @@ class ProductOrdersController < ApplicationController
   end
 
   private
-  
+    
     def set_products
-      @products ||= current_user.customer ? 
-        current_user.customer.orders.find(params[:order_id]).product_orders :
-        current_user.merchant.orders.find(params[:order_id]).product_orders 
+      @role ||= current_user.customer || current_user.merchant
+      @products ||= @role.orders.find(params[:order_id]).product_orders 
     end
 
     def set_product
