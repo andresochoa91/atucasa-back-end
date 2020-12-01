@@ -98,6 +98,7 @@ ActiveRecord::Schema.define(version: 2020_11_25_215642) do
     t.float "price"
     t.boolean "available"
     t.string "product_picture"
+    t.float "tax"
     t.integer "merchant_id"
     t.datetime "created_at", precision: 6, null: false
     t.datetime "updated_at", precision: 6, null: false
@@ -111,5 +112,4 @@ ActiveRecord::Schema.define(version: 2020_11_25_215642) do
     t.datetime "created_at", precision: 6, null: false
     t.datetime "updated_at", precision: 6, null: false
   end
-
 end
