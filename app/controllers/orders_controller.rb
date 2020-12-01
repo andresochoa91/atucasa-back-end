@@ -1,6 +1,6 @@
 class OrdersController < ApplicationController
 
-  before_action :set_order, only: [:update, :destroy]
+  before_action :set_order_customer, only: [:update, :destroy]
 
   def index
     if @orders ||= Order.where(
@@ -11,6 +11,25 @@ class OrdersController < ApplicationController
         json: {
           message: "Success",
           orders: @orders
+        },
+        status: 200
+      })
+    else
+      render ({
+        json: {
+          error: "Not Found"
+        },
+        status: 404
+      })
+    end
+  end
+
+  def index_for_merchant
+    if current_user&.merchant.orders
+      render ({
+        json: {
+          message: "Success",
+          orders: current_user.merchant.orders
         },
         status: 200
       })
@@ -37,6 +56,26 @@ class OrdersController < ApplicationController
           message: "Success",
           order: @order,
           products_order: @order.product_orders
+        },
+        status: 200
+      })
+    else
+      render ({
+        json: {
+          error: "Not Found"
+        },
+        status: 404
+      })
+    end
+  end
+
+  def show_for_merchant    
+    if current_user&.merchant.orders.find(params[:id])
+      render ({
+        json: {
+          message: "Success",
+          order: current_user.merchant.orders.find(params[:id]),
+          products_order: current_user&.merchant.orders.find(params[:id]).product_orders
         },
         status: 200
       })
@@ -131,6 +170,26 @@ class OrdersController < ApplicationController
     end
   end
 
+  def update_for_merchant
+    if current_user&.merchant.orders.find(params[:id]).update(order_params)
+      render ({
+        json: {
+          message: "Order updated successfully",
+          order: current_user&.merchant.orders.find(params[:id]),
+          products_order: current_user&.merchant.orders.find(params[:id]).product_orders
+        },
+        status: 200
+      })
+    else
+      render ({
+        json: {
+          error: "Bad request"
+        },
+        status: 422 #unprocessable entity
+      })
+    end
+  end
+
   def destroy
     if @order.destroy
       render ({
@@ -156,7 +215,8 @@ class OrdersController < ApplicationController
       params.require(:order).permit(:accepted, :current_user, :tip)
     end
 
-    def set_order
+    def set_order_customer
       @order = current_user&.customer.orders.find(params[:id])
     end
+    
 end
