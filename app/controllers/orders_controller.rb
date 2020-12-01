@@ -1,4 +1,7 @@
 class OrdersController < ApplicationController
+
+  before_action :set_order_customer, only: [:update, :destroy]
+
   def index
     if @orders ||= Order.where(
       customer_id: current_user.customer.id, 
@@ -8,6 +11,25 @@ class OrdersController < ApplicationController
         json: {
           message: "Success",
           orders: @orders
+        },
+        status: 200
+      })
+    else
+      render ({
+        json: {
+          error: "Not Found"
+        },
+        status: 404
+      })
+    end
+  end
+
+  def index_for_merchant
+    if current_user&.merchant.orders
+      render ({
+        json: {
+          message: "Success",
+          orders: current_user.merchant.orders
         },
         status: 200
       })
@@ -47,6 +69,26 @@ class OrdersController < ApplicationController
     end
   end
 
+  def show_for_merchant    
+    if current_user&.merchant.orders.find(params[:id])
+      render ({
+        json: {
+          message: "Success",
+          order: current_user.merchant.orders.find(params[:id]),
+          products_order: current_user&.merchant.orders.find(params[:id]).product_orders
+        },
+        status: 200
+      })
+    else
+      render ({
+        json: {
+          error: "Not Found"
+        },
+        status: 404
+      })
+    end
+  end
+
   def create
     if current_user&.customer && params[:merchant_id]
       @order = Order.new(
@@ -58,6 +100,18 @@ class OrdersController < ApplicationController
         tip: params[:tip]
       )
       if @order.save
+
+        #This is receiving a hash from the front-end. Ex:
+        # [
+        #   {
+        #     product_id: 1,
+        #     amount: 2
+        #   },
+        #   {
+        #     product_id: 2,
+        #     amount: 3
+        #   },
+        # ]
 
         params[:products].each do |product|
           new_product = ProductOrder.new(
@@ -96,9 +150,73 @@ class OrdersController < ApplicationController
     end
   end
 
-  # def update
-  # end
+  def update
+    if @order.update(order_params) 
+      render ({
+        json: {
+          message: "Order updated successfully",
+          order: @order,
+          products_order: @order.product_orders
+        },
+        status: 200
+      })
+    else
+      render ({
+        json: {
+          error: "Bad request"
+        },
+        status: 422 #unprocessable entity
+      })
+    end
+  end
 
-  # def destroy
-  # end
+  def update_for_merchant
+    if current_user&.merchant.orders.find(params[:id]).update(order_params)
+      render ({
+        json: {
+          message: "Order updated successfully",
+          order: current_user&.merchant.orders.find(params[:id]),
+          products_order: current_user&.merchant.orders.find(params[:id]).product_orders
+        },
+        status: 200
+      })
+    else
+      render ({
+        json: {
+          error: "Bad request"
+        },
+        status: 422 #unprocessable entity
+      })
+    end
+  end
+
+  def destroy
+    if @order.destroy
+      render ({
+        json: {
+          message: "Order deleted successfully",
+          order: @order,
+        },
+        status: 200
+      })
+    else
+      render ({
+        json: {
+          error: "Bad request"
+        },
+        status: 422 #unprocessable entity
+      })
+    end
+  end
+
+  private
+
+    def order_params
+      params.require(:order).permit(:accepted, :current_user, :tip)
+    end
+
+    def set_order_customer
+      @order = current_user&.customer.orders.find(params[:id])
+    end
+    
 end

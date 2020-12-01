@@ -41,10 +41,16 @@ Rails.application.routes.draw do
   put '/current_user/merchant/links/:id', to: 'links#update'
   delete '/current_user/merchant/links/:id', to: 'links#destroy'
 
-  #Orders Endpoints
+  #Orders Endpoints Customer
   get '/current_user/customer/merchants/:merchant_id/orders', to: 'orders#index'
   get '/current_user/customer/merchants/:merchant_id/orders/:id', to: 'orders#show'
   post '/current_user/customer/merchants/:merchant_id/orders', to: 'orders#create'
+  put '/current_user/customer/merchants/:merchant_id/orders/:id', to: 'orders#update'
+  delete '/current_user/customer/merchants/:merchant_id/orders/:id', to: 'orders#destroy'
+
+  get '/current_user/merchant/orders', to: 'orders#index_for_merchant'
+  get '/current_user/merchant/orders/:id', to: 'orders#show_for_merchant'
+  put '/current_user/merchant/orders/:id', to: 'orders#update_for_merchant'
 
   #Product Order Endpoints
   get '/current_user/customer/merchants/:merchant_id/orders/:order_id/products', to: 'product_orders#index'
