@@ -7,9 +7,9 @@ Rails.application.routes.draw do
   # resources :links
 
   #User Endpoints
-  post '/sign_up', to: 'users#create'
-  post '/log_in', to: 'sessions#create'
-  delete '/log_out', to: 'sessions#destroy'
+  post '/signup', to: 'users#create'
+  post '/login', to: 'sessions#create'
+  delete '/logout', to: 'sessions#destroy'
   get '/current_user', to: 'users#show'
   put '/current_user/update', to: 'users#update'
 
@@ -42,15 +42,16 @@ Rails.application.routes.draw do
   delete '/current_user/merchant/links/:id', to: 'links#destroy'
 
   #Orders Endpoints Customer
-  get '/current_user/customer/merchants/:merchant_id/orders', to: 'orders#index'
-  get '/current_user/customer/merchants/:merchant_id/orders/:id', to: 'orders#show'
+  get '/current_user/orders', to: 'orders#index'
+  get '/current_user/orders/:id', to: 'orders#show'
   post '/current_user/customer/merchants/:merchant_id/orders', to: 'orders#create'
-  put '/current_user/customer/merchants/:merchant_id/orders/:id', to: 'orders#update'
-  delete '/current_user/customer/merchants/:merchant_id/orders/:id', to: 'orders#destroy'
+  put '/current_user/orders/:id', to: 'orders#update'
+  delete '/current_user/orders/:id', to: 'orders#destroy'
 
-  get '/current_user/merchant/orders', to: 'orders#index_for_merchant'
-  get '/current_user/merchant/orders/:id', to: 'orders#show_for_merchant'
-  put '/current_user/merchant/orders/:id', to: 'orders#update_for_merchant'
+  #Orders Endpoints Merchant
+  get '/current_user/merchant/orders', to: 'orders#index'
+  get '/current_user/merchant/orders/:id', to: 'orders#show'
+  put '/current_user/merchant/orders/:id', to: 'orders#update'
 
   #Product Order Endpoints
   get '/current_user/customer/merchants/:merchant_id/orders/:order_id/products', to: 'product_orders#index'

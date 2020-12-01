@@ -1,35 +1,14 @@
 class OrdersController < ApplicationController
 
-  before_action :set_order_customer, only: [:update, :destroy]
+  before_action :set_order, only: [:show, :update, :destroy]
+  before_action :set_role, only: [:index]
 
   def index
-    if @orders ||= Order.where(
-      customer_id: current_user.customer.id, 
-      merchant_id: params[:merchant_id].to_i      
-    )
+    if @role
       render ({
         json: {
           message: "Success",
-          orders: @orders
-        },
-        status: 200
-      })
-    else
-      render ({
-        json: {
-          error: "Not Found"
-        },
-        status: 404
-      })
-    end
-  end
-
-  def index_for_merchant
-    if current_user&.merchant.orders
-      render ({
-        json: {
-          message: "Success",
-          orders: current_user.merchant.orders
+          orders: @role.orders
         },
         status: 200
       })
@@ -44,38 +23,12 @@ class OrdersController < ApplicationController
   end
   
   def show
-    @order ||= Order.find_by(
-      customer_id: current_user.customer.id, 
-      merchant_id: params[:merchant_id].to_i,
-      id: params[:id].to_i
-    )
-    
     if @order
       render ({
         json: {
           message: "Success",
           order: @order,
           products_order: @order.product_orders
-        },
-        status: 200
-      })
-    else
-      render ({
-        json: {
-          error: "Not Found"
-        },
-        status: 404
-      })
-    end
-  end
-
-  def show_for_merchant    
-    if current_user&.merchant.orders.find(params[:id])
-      render ({
-        json: {
-          message: "Success",
-          order: current_user.merchant.orders.find(params[:id]),
-          products_order: current_user&.merchant.orders.find(params[:id]).product_orders
         },
         status: 200
       })
@@ -170,41 +123,30 @@ class OrdersController < ApplicationController
     end
   end
 
-  def update_for_merchant
-    if current_user&.merchant.orders.find(params[:id]).update(order_params)
-      render ({
-        json: {
-          message: "Order updated successfully",
-          order: current_user&.merchant.orders.find(params[:id]),
-          products_order: current_user&.merchant.orders.find(params[:id]).product_orders
-        },
-        status: 200
-      })
-    else
-      render ({
-        json: {
-          error: "Bad request"
-        },
-        status: 422 #unprocessable entity
-      })
-    end
-  end
-
   def destroy
-    if @order.destroy
-      render ({
-        json: {
-          message: "Order deleted successfully",
-          order: @order,
-        },
-        status: 200
-      })
+    if current_user.role == "customer"
+      if @order.destroy
+        render ({
+          json: {
+            message: "Order deleted successfully",
+            order: @order,
+          },
+          status: 200
+        })
+      else
+        render ({
+          json: {
+            error: "Bad request"
+          },
+          status: 422 #unprocessable entity
+        })
+      end
     else
       render ({
         json: {
-          error: "Bad request"
+          error: "Merchants are not allowed to delete orders"
         },
-        status: 422 #unprocessable entity
+        status: 403 #Forbidden
       })
     end
   end
@@ -215,8 +157,12 @@ class OrdersController < ApplicationController
       params.require(:order).permit(:accepted, :current_user, :tip)
     end
 
-    def set_order_customer
-      @order = current_user&.customer.orders.find(params[:id])
+    def set_role
+      @role ||= current_user.merchant || current_user.customer
+    end
+
+    def set_order
+      @order ||= set_role.orders.find(params[:id])
     end
     
 end
