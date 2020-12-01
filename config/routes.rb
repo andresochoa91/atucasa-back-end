@@ -45,7 +45,11 @@ Rails.application.routes.draw do
   get '/current_user/customer/merchants/:merchant_id/orders', to: 'orders#index'
   get '/current_user/customer/merchants/:merchant_id/orders/:id', to: 'orders#show'
   post '/current_user/customer/merchants/:merchant_id/orders', to: 'orders#create'
-  # post '/current_user/merchant/links', to: 'links#create'
-  # put '/current_user/merchant/links/:id', to: 'links#update'
-  # delete '/current_user/merchant/links/:id', to: 'links#destroy'
+
+  #Product Order Endpoints
+  get '/current_user/customer/merchants/:merchant_id/orders/:order_id/products', to: 'product_orders#index'
+  get '/current_user/customer/merchants/:merchant_id/orders/:order_id/products/:id', to: 'product_orders#show'
+  put '/current_user/customer/merchants/:merchant_id/orders/:order_id/products/:id', to: 'product_orders#update'
+  delete '/current_user/customer/merchants/:merchant_id/orders/:order_id/products/:id', to: 'product_orders#destroy'
+
 end

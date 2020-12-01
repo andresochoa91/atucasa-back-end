@@ -24,12 +24,12 @@ class ProductOrder < ApplicationRecord
 
   validates :amount,
     presence: true,
-    length: { minimum: 1 },
+    numericality: { greater_than: 0 },
     on: :create
 
   validates :amount,
     allow_nil: true,
-    length: { minimum: 1 },
+    numericality: { greater_than: -1 },
     on: :update
 
 end
