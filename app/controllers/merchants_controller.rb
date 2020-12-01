@@ -20,7 +20,8 @@ class MerchantsController < ApplicationController
         merchant_info: @merchant,
         products: @merchant.products,
         links: @merchant.links,
-        email: @merchant.user.email
+        email: @merchant.user.email,
+        location: @merchant.user.location
       },
       status: 200
     })
