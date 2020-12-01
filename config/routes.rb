@@ -1,10 +1,6 @@
 Rails.application.routes.draw do
   # For details on the DSL available within this file, see https://guides.rubyonrails.org/routing.html
-  # resources :users
-  # resources :customers
-  # resources :merchants
-  # resources :products
-  # resources :links
+  resources :merchants, only: [:index, :show]
 
   #User Endpoints
   post '/signup', to: 'users#create'
@@ -22,36 +18,29 @@ Rails.application.routes.draw do
   put '/current_user/customer', to: 'customers#update'
 
   #Merchant Endpoints
-  get '/current_user/customer/merchants', to: 'merchants#index'
-  get '/current_user/customer/merchants/:id', to: 'merchants#show'
   get '/current_user/merchant', to: 'merchants#show_merchant_data'
   put '/current_user/merchant', to: 'merchants#update'
 
   #Products Endpoints
-  get '/current_user/merchant/products', to: 'products#index'
-  get '/current_user/merchant/products/:id', to: 'products#show'
-  post '/current_user/merchant/products', to: 'products#create'
-  put '/current_user/merchant/products/:id', to: 'products#update'
-  delete '/current_user/merchant/products/:id', to: 'products#destroy'
+  get '/current_user/products', to: 'products#index'
+  get '/current_user/products/:id', to: 'products#show'
+  post '/current_user/products', to: 'products#create'
+  put '/current_user/products/:id', to: 'products#update'
+  delete '/current_user/products/:id', to: 'products#destroy'
 
   #Links Endpoints
-  get '/current_user/merchant/links', to: 'links#index'
-  get '/current_user/merchant/links/:id', to: 'links#show'
-  post '/current_user/merchant/links', to: 'links#create'
-  put '/current_user/merchant/links/:id', to: 'links#update'
-  delete '/current_user/merchant/links/:id', to: 'links#destroy'
+  get '/current_user/links', to: 'links#index'
+  get '/current_user/links/:id', to: 'links#show'
+  post '/current_user/links', to: 'links#create'
+  put '/current_user/links/:id', to: 'links#update'
+  delete '/current_user/links/:id', to: 'links#destroy'
 
-  #Orders Endpoints Customer
+  #Orders Endpoints
   get '/current_user/orders', to: 'orders#index'
   get '/current_user/orders/:id', to: 'orders#show'
-  post '/current_user/customer/merchants/:merchant_id/orders', to: 'orders#create'
+  post '/merchants/:merchant_id/create_order', to: 'orders#create'
   put '/current_user/orders/:id', to: 'orders#update'
   delete '/current_user/orders/:id', to: 'orders#destroy'
-
-  #Orders Endpoints Merchant
-  get '/current_user/merchant/orders', to: 'orders#index'
-  get '/current_user/merchant/orders/:id', to: 'orders#show'
-  put '/current_user/merchant/orders/:id', to: 'orders#update'
 
   #Product Order Endpoints
   get '/current_user/customer/merchants/:merchant_id/orders/:order_id/products', to: 'product_orders#index'

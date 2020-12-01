@@ -55,14 +55,14 @@ class OrdersController < ApplicationController
       if @order.save
 
         #This is receiving a hash from the front-end. Ex:
-        # [
+        # "products": [
         #   {
-        #     product_id: 1,
-        #     amount: 2
+        #     "id": 1,
+        #     "amount": 2
         #   },
         #   {
-        #     product_id: 2,
-        #     amount: 3
+        #     "id": 2,
+        #     "amount": 3
         #   },
         # ]
 
