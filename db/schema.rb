@@ -55,7 +55,7 @@ ActiveRecord::Schema.define(version: 2020_11_25_215642) do
     t.string "merchant_name"
     t.string "slug"
     t.string "phone_number"
-    t.string "legal_id"
+    t.string "tax_id"
     t.text "location"
     t.text "description"
     t.text "profile_picture"
