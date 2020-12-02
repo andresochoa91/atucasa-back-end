@@ -29,8 +29,7 @@ module Atupuerta
     config.middleware.insert_before 0, Rack::Cors, debug: true do
       allow do
         origins '*'
-        resource '*',
-          credentials: true, 
+        resource '*', 
           headers: :any,
           methods: [:get, :post, :put, :patch, :delete, :options, :head]
       end
