@@ -28,22 +28,17 @@ module Atupuerta
 
     config.middleware.insert_before 0, Rack::Cors, debug: true do
       allow do
-        origins '
-          https://localhost:3001, 
-          http://localhost:3001,
-          localhost:3001,
-          https://atucasa.netlify.app/
-        '
+        origins '*'
         resource '*', 
           headers: :any,
           methods: [:get, :post, :put, :patch, :delete, :options, :head]
       end
     end
 
-    # config.action_dispatch.default_headers = {
-    #   'Access-Control-Allow-Origin' => 'https://localhost:3001',
-    #   'Access-Control-Request-Method' => %w{GET POST OPTIONS}.join(",")
-    # }
+    config.action_dispatch.default_headers = {
+      'Access-Control-Allow-Origin' => 'https://localhost:3001',
+      'Access-Control-Request-Method' => %w{GET POST OPTIONS}.join(",")
+    }
 
   end
 end
