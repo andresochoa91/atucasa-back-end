@@ -30,7 +30,7 @@ class UsersController < ApplicationController
         render ({
           json: {
             message: "User created successfully",
-            user: @user
+            user: login_hash
           },
           status: 201
         })
