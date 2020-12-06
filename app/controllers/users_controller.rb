@@ -5,7 +5,7 @@ class UsersController < ApplicationController
       render ({
         json: {
           message: "Success",
-          users: current_user
+          user: current_user
         },
         status: 200
       })

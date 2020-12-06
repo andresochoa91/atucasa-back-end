@@ -23,10 +23,10 @@ class SessionsController < ApplicationController
           cookies.signed[:jwt] = {value: login_hash[:token], httponly: true}
           render json: login_hash
         else
-          render json: {status: 'incorrect email or password', code: 422}  
+          render json: {error: 'incorrect email or password'}, status: 422  
         end
       else
-        render json: {status: 'specify email address and password', code: 422}
+        render json: {error: 'specify email address and password'}, status: 422
       end
     else
       render json: { error: "User already logged in" }, status: 200
