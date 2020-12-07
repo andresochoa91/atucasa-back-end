@@ -7,7 +7,7 @@ class ApplicationController < ActionController::API
     if decoded_token
       user = User.find_by(id: decoded_token[:user_id])
     end
-    if user then return true else render json: {status: 'unauthorized', code: 401} end
+    if user then return true else render json: {error: 'unauthorized'}, code: 401 end
   end
 
   def current_user
