@@ -7,9 +7,9 @@ class SessionsController < ApplicationController
     user = current_user
     if user  
       cookies.delete(:jwt)
-      render json: {status: 'OK', code: 200}
+      render json: {message: 'Logged out'}, status: 200
     else
-      render json: {status: 'session not found', code: 404}
+      render json: {error: 'Session not found'}, code: 404
     end
   end
 
@@ -23,10 +23,10 @@ class SessionsController < ApplicationController
           cookies.signed[:jwt] = {value: login_hash[:token], httponly: true}
           render json: login_hash
         else
-          render json: {error: 'incorrect email or password'}, status: 422  
+          render json: {error: 'Incorrect email or password'}, status: 422  
         end
       else
-        render json: {error: 'specify email address and password'}, status: 422
+        render json: {error: 'Specify email address and password'}, status: 422
       end
     else
       render json: { error: "User already logged in" }, status: 200
