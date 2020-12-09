@@ -32,7 +32,7 @@ class MerchantsController < ApplicationController
       render ({
         json: {
           message: "Success",
-          customer: set_merchant
+          merchant: set_merchant
         },
         status: 200
       })
