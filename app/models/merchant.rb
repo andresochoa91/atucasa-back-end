@@ -5,7 +5,7 @@ class Merchant < ApplicationRecord
   has_many :orders
 
   validates :merchant_name,
-    length: { minimum: 1 },
+    length: { minimum: 3 },
     uniqueness: true,
     allow_nil: true,
     on: :update
