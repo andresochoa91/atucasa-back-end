@@ -21,7 +21,6 @@ ActiveRecord::Schema.define(version: 2020_11_25_215642) do
     t.string "last_name"
     t.string "slug"
     t.string "phone_number"
-    t.text "location"
     t.text "profile_picture"
     t.integer "user_id"
     t.datetime "created_at", precision: 6, null: false
@@ -56,7 +55,6 @@ ActiveRecord::Schema.define(version: 2020_11_25_215642) do
     t.string "slug"
     t.string "phone_number"
     t.string "tax_id"
-    t.text "location"
     t.text "description"
     t.text "profile_picture"
     t.text "background_picture"

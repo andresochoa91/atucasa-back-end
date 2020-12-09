@@ -5,7 +5,6 @@ class CreateMerchants < ActiveRecord::Migration[6.0]
       t.string :slug
       t.string :phone_number
       t.string :tax_id
-      t.text :location
       t.text :description
       t.text :profile_picture
       t.text :background_picture
