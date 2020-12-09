@@ -15,13 +15,13 @@ class Merchant < ApplicationRecord
     allow_nil: true,
     on: :update
 
-  validates :legal_id,
+  validates :tax_id,
     length: { minimum: 6 },
     allow_nil: true,
     on: :update
 
   validates :description,
-    length: 20..400,
+    length: 4..400,
     allow_nil: true,
     on: :update
 
