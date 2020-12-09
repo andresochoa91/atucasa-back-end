@@ -3,7 +3,7 @@ class Customer < ApplicationRecord
   has_many :orders
 
   validates :username,
-    length: 1..20,
+    length: 3..20,
     uniqueness: true,
     allow_nil: true,
     on: :update

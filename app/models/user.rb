@@ -81,7 +81,7 @@ class User < ApplicationRecord
     def slugify
       slug = (email.split("@")[0]).parameterize
 
-      while Customer.find_by(slug: slug) || Merchant.find_by(slug: slug)
+      while Customer.find_by(slug: slug) || Merchant.find_by(slug: slug) || slug.length < 4
         slug += (rand(0..9)).to_s
       end
       
