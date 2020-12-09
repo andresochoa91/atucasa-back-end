@@ -1,11 +1,9 @@
 class Customer < ApplicationRecord
   belongs_to :user
   has_many :orders
-  # validates_presence_of :username
-  # validates_uniqueness_of :username
 
   validates :username,
-    length: 3..20,
+    length: 1..20,
     uniqueness: true,
     allow_nil: true,
     on: :update
@@ -25,10 +23,6 @@ class Customer < ApplicationRecord
     allow_nil: true,
     on: :update
   
-  # if self.username.present?
-  #   self.slug = username.parameterize
-  # end
-
 end
 
 # /\A(.+)@(.+)\z/

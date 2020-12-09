@@ -73,7 +73,7 @@ class UsersController < ApplicationController
     else
       render ({
         json: {
-          error: "Not Found"
+          error: "Password is not correct, try again!"
         },
         status: 404
       })
