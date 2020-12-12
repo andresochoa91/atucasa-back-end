@@ -9,6 +9,14 @@ class UsersController < ApplicationController
         },
         status: 200
       })
+    elsif (params[:id])
+      render ({
+        json: {
+          message: "Success",
+          user: User.find(params[:id])
+        },
+        status: 200
+      })
     else
       render ({
         json: {
