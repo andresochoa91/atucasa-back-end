@@ -31,14 +31,15 @@ module Atupuerta
         origins 'localhost:3001'
         resource '*', 
           headers: :any,
-          methods: [:get, :post, :put, :patch, :delete, :options, :head]
+          methods: [:get, :post, :put, :patch, :delete, :options, :head],
+          credentials: true
       end
     end
 
-    config.action_dispatch.default_headers = {
-      'Access-Control-Allow-Origin' => 'https://localhost:3001',
-      'Access-Control-Request-Method' => %w{GET POST OPTIONS}.join(",")
-    }
+    # config.action_dispatch.default_headers = {
+    #   'Access-Control-Allow-Origin' => 'https://localhost:3001',
+    #   'Access-Control-Request-Method' => %w{GET POST OPTIONS}.join(",")
+    # }
 
   end
 end
