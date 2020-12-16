@@ -2,7 +2,18 @@ class MerchantsController < ApplicationController
   before_action :set_merchant, only: [:show_merchant_data, :update]
 
   def index
-    @merchants = Merchant.all
+    @merchants = Merchant.all.map do |merchant|
+      {
+        message: "Success",
+        merchant_info:  merchant,
+        products: merchant.products,
+        links: merchant.links,
+        email: merchant.user.email,
+        location: merchant.user.location,
+        user_id: merchant.user.id
+      }
+    end
+
     render ({
       json: {
         message: "Success",

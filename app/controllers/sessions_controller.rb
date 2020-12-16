@@ -20,7 +20,15 @@ class SessionsController < ApplicationController
       if email && password
         login_hash = User.handle_login(email, password)
         if login_hash
-          cookies.signed[:jwt] = {value: login_hash[:token], httponly: true}
+          cookies.signed[:jwt] = {
+            value: login_hash[:token], 
+            httponly: true,
+            # same_site: :none,
+            # secure: true,
+            # domain: :all,
+            expires: 2.hours.from_now
+          }
+
           render json: login_hash
         else
           render json: {error: 'Incorrect email or password'}, status: 422  
