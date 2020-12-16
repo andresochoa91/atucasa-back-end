@@ -36,6 +36,7 @@ users = User.create([
 products = Product.create([
   {
     product_name: "Vanilla Ice-cream", 
+    category: "Ice-cream", 
     description: "Great!",
     price: 2, 
     tax: 2 * 0.09,
@@ -43,7 +44,8 @@ products = Product.create([
     merchant_id: 1
   },
   {
-    product_name: "Raspberry Ice-cream", 
+    product_name: "Raspberries", 
+    category: "Fruits",
     description: "Amazing!",
     price: 3, 
     tax: 3 * 0.09,
@@ -51,7 +53,8 @@ products = Product.create([
     merchant_id: 1
   },
   {
-    product_name: "Coffee Ice-cream", 
+    product_name: "Chocolate bar", 
+    category: "Sweets",
     description: "The best!",
     price: 4, 
     tax: 4 * 0.09,
@@ -59,7 +62,8 @@ products = Product.create([
     merchant_id: 2
   },
   {
-    product_name: "Chocolate Ice-cream", 
+    product_name: "Lettuce", 
+    category: "Veggetables",
     description: "Yummy!",
     price: 5, 
     tax: 5 * 0.09,
