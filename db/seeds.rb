@@ -63,7 +63,7 @@ products = Product.create([
   },
   {
     product_name: "Lettuce", 
-    category: "Veggetables",
+    category: "Vegetables",
     description: "Yummy!",
     price: 5, 
     tax: 5 * 0.09,
