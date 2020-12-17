@@ -8,7 +8,19 @@ class OrdersController < ApplicationController
       render ({
         json: {
           message: "Success",
-          orders: @role.orders
+          orders: @role.orders.map do |order|
+            {
+              id: order.id,
+              customer_id: order.customer_id,
+              merchant_id: order.merchant_id,
+              accepted: order.accepted,
+              delivery_fee: order.delivery_fee,
+              tip: order.tip,
+              products_order: ProductOrder.where(order_id: order.id),
+              created_at: order.created_at,
+              updated_at: order.updated_at
+            }
+          end
         },
         status: 200
       })
@@ -47,7 +59,7 @@ class OrdersController < ApplicationController
       @order = Order.new(
         customer_id: current_user.customer.id,
         merchant_id: params[:merchant_id].to_i,
-        accepted: false,
+        accepted: true,
         current_user: "merchant",
         delivery_fee: 5,
         tip: params[:tip]
