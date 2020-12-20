@@ -59,9 +59,9 @@ class OrdersController < ApplicationController
       @order = Order.new(
         customer_id: current_user.customer.id,
         merchant_id: params[:merchant_id].to_i,
-        accepted: true,
+        accepted: false,
         current_user: "merchant",
-        delivery_fee: 5,
+        delivery_fee: params[:delivery_fee],
         tip: params[:tip]
       )
       if @order.save
