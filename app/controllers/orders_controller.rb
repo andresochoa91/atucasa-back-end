@@ -14,7 +14,9 @@ class OrdersController < ApplicationController
               customer_id: order.customer_id,
               merchant_id: order.merchant_id,
               accepted: order.accepted,
+              canceled: order.canceled,
               delivery_fee: order.delivery_fee,
+              current_user: order.current_user,
               tip: order.tip,
               products_order: ProductOrder.where(order_id: order.id),
               created_at: order.created_at,
@@ -60,6 +62,7 @@ class OrdersController < ApplicationController
         customer_id: current_user.customer.id,
         merchant_id: params[:merchant_id].to_i,
         accepted: false,
+        canceled: false,
         current_user: "merchant",
         delivery_fee: params[:delivery_fee],
         tip: params[:tip]
@@ -166,7 +169,7 @@ class OrdersController < ApplicationController
   private
 
     def order_params
-      params.require(:order).permit(:accepted, :current_user, :tip)
+      params.require(:order).permit(:accepted, :canceled, :current_user, :tip)
     end
 
     def set_role

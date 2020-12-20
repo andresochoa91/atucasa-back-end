@@ -100,6 +100,7 @@ orders = Order.create([
     customer_id: 1,
     merchant_id: 1,
     accepted: false,
+    canceled: false,
     current_user: "merchant",
     tip: 10,
     delivery_fee: 5
@@ -108,6 +109,7 @@ orders = Order.create([
     customer_id: 2,
     merchant_id: 1,
     accepted: false,
+    canceled: false,
     current_user: "merchant",
     tip: 14,
     delivery_fee: 5
@@ -116,6 +118,7 @@ orders = Order.create([
     customer_id: 1,
     merchant_id: 2,
     accepted: false,
+    canceled: false,
     current_user: "merchant",
     tip: 12,
     delivery_fee: 5
@@ -124,6 +127,7 @@ orders = Order.create([
     customer_id: 2,
     merchant_id: 2,
     accepted: false,
+    canceled: false,
     current_user: "merchant",
     tip: 17,
     delivery_fee: 5
