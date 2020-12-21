@@ -142,6 +142,7 @@ product_orders = ProductOrder.create([
     price: Product.find(1).price,
     tax: Product.find(1).tax,
     amount: 1,
+    available: true
   },
   {
     product_id: 2,
@@ -150,6 +151,7 @@ product_orders = ProductOrder.create([
     price: Product.find(2).price,
     tax: Product.find(2).tax,
     amount: 2,
+    available: true
   },
   {
     product_id: 3,
@@ -158,6 +160,7 @@ product_orders = ProductOrder.create([
     price: Product.find(3).price,
     tax: Product.find(3).tax,
     amount: 1,
+    available: true
   },
   {
     product_id: 4,
@@ -166,6 +169,7 @@ product_orders = ProductOrder.create([
     price: Product.find(4).price,
     tax: Product.find(4).tax,
     amount: 1,
+    available: true
   }
 ])
 
