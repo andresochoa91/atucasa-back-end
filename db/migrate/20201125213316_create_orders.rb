@@ -5,6 +5,7 @@ class CreateOrders < ActiveRecord::Migration[6.0]
       t.integer :merchant_id
       t.boolean :accepted
       t.boolean :canceled
+      t.text :message
       t.string :current_user
       t.float :tip
       t.float :delivery_fee
