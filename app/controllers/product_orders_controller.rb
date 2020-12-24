@@ -42,7 +42,11 @@ class ProductOrdersController < ApplicationController
   end
 
   def update
-    if @product&.update(amount: params[:amount])
+    if @product
+      @product.update(amount: params[:amount]) if params[:amount]
+      @product.update(amount_changed: params[:amount_changed]) if params[:amount_changed]
+      @product.update(available: params[:available]) if params[:available] 
+
       render ({
         json: {
           message: "Product in order updated successfully",

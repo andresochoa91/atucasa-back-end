@@ -86,6 +86,8 @@ ActiveRecord::Schema.define(version: 2020_11_25_215642) do
     t.float "price"
     t.float "tax"
     t.integer "amount"
+    t.boolean "available"
+    t.boolean "amount_changed"
     t.datetime "created_at", precision: 6, null: false
     t.datetime "updated_at", precision: 6, null: false
     t.index ["order_id"], name: "index_product_orders_on_order_id"

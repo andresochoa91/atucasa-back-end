@@ -7,6 +7,8 @@ class CreateProductOrders < ActiveRecord::Migration[6.0]
       t.float :price
       t.float :tax
       t.integer :amount
+      t.boolean :available
+      t.boolean :amount_changed
 
       t.timestamps
     end
