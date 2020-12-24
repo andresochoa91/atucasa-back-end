@@ -44,9 +44,12 @@ Rails.application.routes.draw do
   delete '/current_user/orders/:id', to: 'orders#destroy'
 
   #Product Order Endpoints
-  get '/current_user/orders/:order_id/products_order', to: 'product_orders#index'
-  get '/current_user/orders/:order_id/products_order/:id', to: 'product_orders#show'
-  put '/current_user/orders/:order_id/products_order/:id', to: 'product_orders#update'
-  delete '/current_user/orders/:order_id/products_order/:id', to: 'product_orders#destroy'
+  # get '/current_user/orders/:order_id/products_order', to: 'product_orders#index'
+  # get '/current_user/orders/:order_id/products_order/:id', to: 'product_orders#show'
+  # put '/current_user/orders/:order_id/products_order/:id', to: 'product_orders#update'
+  # delete '/current_user/orders/:order_id/products_order/:id', to: 'product_orders#destroy'
+
+  put '/products_order/:id', to: 'product_orders#update'
+  delete '/products_order/:id', to: 'product_orders#destroy'
 
 end
