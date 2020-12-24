@@ -88,7 +88,8 @@ class OrdersController < ApplicationController
             price: Product.find(product[:id]).price,
             tax: Product.find(product[:id]).tax,
             amount: product[:amount],
-            available: true
+            available: true,
+            amount_changed: false
           ) 
           @order.product_orders << new_product
         end
