@@ -18,6 +18,7 @@ class OrdersController < ApplicationController
               delivery_fee: order.delivery_fee,
               current_user: order.current_user,
               tip: order.tip,
+              message: order.message,
               products_order: ProductOrder.where(order_id: order.id),
               created_at: order.created_at,
               updated_at: order.updated_at
@@ -65,7 +66,8 @@ class OrdersController < ApplicationController
         canceled: false,
         current_user: "merchant",
         delivery_fee: params[:delivery_fee],
-        tip: params[:tip]
+        tip: params[:tip],
+        message: ""
       )
       if @order.save
 
@@ -171,7 +173,7 @@ class OrdersController < ApplicationController
   private
 
     def order_params
-      params.require(:order).permit(:accepted, :canceled, :current_user, :tip)
+      params.require(:order).permit(:accepted, :canceled, :current_user, :tip, :message)
     end
 
     def set_role
