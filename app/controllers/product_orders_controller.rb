@@ -3,24 +3,24 @@ class ProductOrdersController < ApplicationController
   before_action :set_products, only: [:index]
   before_action :set_product, only: [:show, :update, :destroy]
 
-  def index
-    if @products
-      render ({
-        json: {
-          message: "Success",
-          products: @products
-        },
-        status: 200
-      })
-    else
-      render ({
-        json: {
-          error: "Not Found"
-        },
-        status: 404
-      })
-    end
-  end
+  # def index
+  #   if @products
+  #     render ({
+  #       json: {
+  #         message: "Success",
+  #         products: @products
+  #       },
+  #       status: 200
+  #     })
+  #   else
+  #     render ({
+  #       json: {
+  #         error: "Not Found"
+  #       },
+  #       status: 404
+  #     })
+  #   end
+  # end
 
   def show
     if @product
@@ -85,13 +85,14 @@ class ProductOrdersController < ApplicationController
 
   private
     
-    def set_products
-      @role ||= current_user.customer || current_user.merchant
-      @products ||= @role.orders.find(params[:order_id]).product_orders 
-    end
+    # def set_products
+    #   @role ||= current_user.customer || current_user.merchant
+    #   @products ||= @role.orders.find(params[:order_id]).product_orders 
+    # end
 
     def set_product
-      @product ||= set_products.find(params[:id])
+      # @product ||= set_products.find(params[:id])
+      @product ||= ProductOrder.find(params[:id])
     end
 
 end
