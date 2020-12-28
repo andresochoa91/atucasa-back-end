@@ -1,6 +1,6 @@
 class ProductOrdersController < ApplicationController
 
-  before_action :set_products, only: [:index]
+  # before_action :set_products, only: [:index]
   before_action :set_product, only: [:show, :update, :destroy]
 
   # def index
@@ -42,11 +42,7 @@ class ProductOrdersController < ApplicationController
   end
 
   def update
-    if @product
-      @product.update(amount: params[:amount]) if params[:amount]
-      @product.update(amount_changed: params[:amount_changed]) if params[:amount_changed]
-      @product.update(available: params[:available]) if params[:available] 
-
+    if @product&.update(product_params)
       render ({
         json: {
           message: "Product in order updated successfully",
@@ -89,6 +85,10 @@ class ProductOrdersController < ApplicationController
     #   @role ||= current_user.customer || current_user.merchant
     #   @products ||= @role.orders.find(params[:order_id]).product_orders 
     # end
+
+    def product_params
+      params.permit(:amount, :amount_changed, :available)
+    end
 
     def set_product
       # @product ||= set_products.find(params[:id])
