@@ -44,6 +44,8 @@ ActiveRecord::Schema.define(version: 2020_11_25_215642) do
     t.string "address"
     t.integer "zip_code"
     t.text "details"
+    t.float "latitude"
+    t.float "longitude"
     t.integer "user_id"
     t.datetime "created_at", precision: 6, null: false
     t.datetime "updated_at", precision: 6, null: false

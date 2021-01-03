@@ -50,7 +50,7 @@ class LocationsController < ApplicationController
     end
 
     def location_params
-      params.require(:location).permit(:country, :state, :city, :address, :zip_code, :details)
+      params.require(:location).permit(:country, :state, :city, :address, :zip_code, :details, :latitude, :longitude)
     end
 
     # def use_new_name
