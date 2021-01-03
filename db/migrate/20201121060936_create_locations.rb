@@ -7,6 +7,8 @@ class CreateLocations < ActiveRecord::Migration[6.0]
       t.string :address
       t.integer :zip_code
       t.text :details
+      t.float :latitude
+      t.float :longitude
       t.integer :user_id
 
       t.timestamps
