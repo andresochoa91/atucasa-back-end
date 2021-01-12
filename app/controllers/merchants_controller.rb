@@ -38,6 +38,21 @@ class MerchantsController < ApplicationController
     })
   end
 
+  def show_through_slug
+    @merchant = Merchant.find_by(slug: params[:slug])
+    render ({
+      json: {
+        message: "Success",
+        merchant_info: @merchant,
+        products: @merchant.products,
+        links: @merchant.links,
+        email: @merchant.user.email,
+        location: @merchant.user.location
+      },
+      status: 200
+    })
+  end
+
   def show_merchant_data
     if current_user&.role == "merchant"
       render ({
@@ -93,6 +108,6 @@ class MerchantsController < ApplicationController
     end
 
     def merchant_params
-      params.permit(:merchant_name, :phone_number, :tax_id, :description, :profile_picture, :background_picture)
+      params.permit(:merchant_name, :phone_number, :tax_id, :description, :profile_picture, :background_picture, :slug)
     end
 end
