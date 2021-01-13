@@ -24,7 +24,9 @@ class MerchantsController < ApplicationController
   end
 
   def index_searchbox
-    @merchants = pp Product.where("product_name ILIKE ?", "%#{(params[:searchbox])}%").where(available: true).map do |merchant|
+    products = Product.where("product_name ILIKE ?", "%#{(params[:searchbox])}%").where(available: true)
+    @merchants = products.map do |product|
+      merchant = product.merchant
       {
         message: "Success",
         merchant_info:  merchant,
@@ -33,7 +35,6 @@ class MerchantsController < ApplicationController
         email: merchant.user.email,
         location: merchant.user.location,
         user_id: merchant.user.id,
-        slug: merchant.slug
       }
     end
 
