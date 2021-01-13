@@ -23,6 +23,29 @@ class MerchantsController < ApplicationController
     })
   end
 
+  def index_searchbox
+    @merchants = pp Product.where("product_name ILIKE ?", "%#{(params[:searchbox])}%").where(available: true).map do |merchant|
+      {
+        message: "Success",
+        merchant_info:  merchant,
+        products: merchant.products,
+        links: merchant.links,
+        email: merchant.user.email,
+        location: merchant.user.location,
+        user_id: merchant.user.id,
+        slug: merchant.slug
+      }
+    end
+
+    render ({
+      json: {
+        message: "Success",
+        merchants: @merchants
+      },
+      status: 200
+    })
+  end
+
   def show
     @merchant = Merchant.find(params[:id])
     render ({
@@ -108,6 +131,6 @@ class MerchantsController < ApplicationController
     end
 
     def merchant_params
-      params.permit(:merchant_name, :phone_number, :tax_id, :description, :profile_picture, :background_picture, :slug)
+      params.permit(:merchant_name, :phone_number, :tax_id, :description, :profile_picture, :background_picture, :slug, :searchbox)
     end
 end
