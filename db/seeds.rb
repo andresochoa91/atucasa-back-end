@@ -13,24 +13,24 @@ users = User.create([
     password_confirmation: "123456789",
     role: "customer"
   },
-  {
-    email: "hlviets@gmail.com",
-    password: "123456789",
-    password_confirmation: "123456789",
-    role: "customer"
-  },
+  # {
+  #   email: "hlviets@gmail.com",
+  #   password: "123456789",
+  #   password_confirmation: "123456789",
+  #   role: "customer"
+  # },
   {
     email: "andres_ochoa91@gmail.com",
     password: "123456789",
     password_confirmation: "123456789",
     role: "merchant"
   },
-  {
-    email: "helena@gmail.com",
-    password: "123456789",
-    password_confirmation: "123456789",
-    role: "merchant"
-  }
+  # {
+  #   email: "helena@gmail.com",
+  #   password: "123456789",
+  #   password_confirmation: "123456789",
+  #   role: "merchant"
+  # }
 ])
 
 products = Product.create([
@@ -52,24 +52,24 @@ products = Product.create([
     available: false,
     merchant_id: 1
   },
-  {
-    product_name: "Chocolate bar", 
-    category: "Sweets",
-    description: "The best!",
-    price: 4, 
-    tax: 4 * 0.09,
-    available: true,
-    merchant_id: 2
-  },
-  {
-    product_name: "Lettuce", 
-    category: "Vegetables",
-    description: "Yummy!",
-    price: 5, 
-    tax: 5 * 0.09,
-    available: false,
-    merchant_id: 2
-  }
+  # {
+  #   product_name: "Chocolate bar", 
+  #   category: "Sweets",
+  #   description: "The best!",
+  #   price: 4, 
+  #   tax: 4 * 0.09,
+  #   available: true,
+  #   merchant_id: 2
+  # },
+  # {
+  #   product_name: "Lettuce", 
+  #   category: "Vegetables",
+  #   description: "Yummy!",
+  #   price: 5, 
+  #   tax: 5 * 0.09,
+  #   available: false,
+  #   merchant_id: 2
+  # }
 ])
 
 links = Link.create([
@@ -83,16 +83,16 @@ links = Link.create([
     url: "https://www.twitter.com",
     merchant_id: 1
   },
-  {
-    site_name: "Facebook",
-    url: "https://www.facebook.com",
-    merchant_id: 2
-  },
-  {
-    site_name: "Twitter",
-    url: "https://www.twitter.com",
-    merchant_id: 2
-  }
+  # {
+  #   site_name: "Facebook",
+  #   url: "https://www.facebook.com",
+  #   merchant_id: 2
+  # },
+  # {
+  #   site_name: "Twitter",
+  #   url: "https://www.twitter.com",
+  #   merchant_id: 2
+  # }
 ])
 
 orders = Order.create([
@@ -106,36 +106,36 @@ orders = Order.create([
     delivery_fee: 5,
     message: ""
   },
-  {
-    customer_id: 2,
-    merchant_id: 1,
-    accepted: false,
-    canceled: false,
-    current_user: "merchant",
-    tip: 14,
-    delivery_fee: 5,
-    message: ""
-  },
-  {
-    customer_id: 1,
-    merchant_id: 2,
-    accepted: false,
-    canceled: false,
-    current_user: "merchant",
-    tip: 12,
-    delivery_fee: 5,
-    message: ""
-  },
-  {
-    customer_id: 2,
-    merchant_id: 2,
-    accepted: false,
-    canceled: false,
-    current_user: "merchant",
-    tip: 17,
-    delivery_fee: 5,
-    message: ""
-  }
+  # {
+  #   customer_id: 2,
+  #   merchant_id: 1,
+  #   accepted: false,
+  #   canceled: false,
+  #   current_user: "merchant",
+  #   tip: 14,
+  #   delivery_fee: 5,
+  #   message: ""
+  # },
+  # {
+  #   customer_id: 1,
+  #   merchant_id: 2,
+  #   accepted: false,
+  #   canceled: false,
+  #   current_user: "merchant",
+  #   tip: 12,
+  #   delivery_fee: 5,
+  #   message: ""
+  # },
+  # {
+  #   customer_id: 2,
+  #   merchant_id: 2,
+  #   accepted: false,
+  #   canceled: false,
+  #   current_user: "merchant",
+  #   tip: 17,
+  #   delivery_fee: 5,
+  #   message: ""
+  # }
 ])
 
 product_orders = ProductOrder.create([
@@ -157,23 +157,23 @@ product_orders = ProductOrder.create([
     amount: 2,
     available: true
   },
-  {
-    product_id: 3,
-    order_id: 3,
-    product_name: Product.find(3).product_name,
-    price: Product.find(3).price,
-    tax: Product.find(3).tax,
-    amount: 1,
-    available: true
-  },
-  {
-    product_id: 4,
-    order_id: 3,
-    product_name: Product.find(4).product_name,
-    price: Product.find(4).price,
-    tax: Product.find(4).tax,
-    amount: 1,
-    available: true
-  }
+  # {
+  #   product_id: 3,
+  #   order_id: 3,
+  #   product_name: Product.find(3).product_name,
+  #   price: Product.find(3).price,
+  #   tax: Product.find(3).tax,
+  #   amount: 1,
+  #   available: true
+  # },
+  # {
+  #   product_id: 4,
+  #   order_id: 3,
+  #   product_name: Product.find(4).product_name,
+  #   price: Product.find(4).price,
+  #   tax: Product.find(4).tax,
+  #   amount: 1,
+  #   available: true
+  # }
 ])
 

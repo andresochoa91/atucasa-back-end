@@ -23,6 +23,7 @@ Rails.application.routes.draw do
   put '/current_user/merchant', to: 'merchants#update'
 
   get '/:slug', to: 'merchants#show_through_slug'
+  get '/merchants/product/:searchbox', to: 'merchants#index_searchbox'
 
   #Products Endpoints
   get '/current_user/products', to: 'products#index'
