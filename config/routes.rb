@@ -1,4 +1,6 @@
 Rails.application.routes.draw do
+  get 'cache_urls/show'
+  get 'cache_urls/create'
   # For details on the DSL available within this file, see https://guides.rubyonrails.org/routing.html
   resources :merchants, only: [:index, :show]
   resources :users, only: [:show]
@@ -55,5 +57,9 @@ Rails.application.routes.draw do
   get '/products_order/:id', to: 'product_orders#show'
   put '/products_order/:id', to: 'product_orders#update'
   delete '/products_order/:id', to: 'product_orders#destroy'
+
+  #Cache URL
+  get '/cache/:url', to: 'cache_urls#show'
+  post '/cache/:url', to: 'cache_urls#create'
 
 end
