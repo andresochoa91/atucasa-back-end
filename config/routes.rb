@@ -59,9 +59,9 @@ Rails.application.routes.draw do
   delete '/products_order/:id', to: 'product_orders#destroy'
 
   #Cache URL
-  
-  post '/cache/no_url', to: 'cache_urls#create'
-  post '/cache/show_without_url', to: 'cache_urls#show_without_url'
+
+  post '/cache/show_no_url', to: 'cache_urls#show' #show without coords url
+  post '/cache/no_url', to: 'cache_urls#create' #create without coords url
   
   get '/cache/:url', to: 'cache_urls#show'
   post '/cache/:url', to: 'cache_urls#create'
