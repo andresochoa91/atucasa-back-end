@@ -20,25 +20,6 @@ class CacheUrlsController < ApplicationController
     end
   end
 
-  def show_without_url
-    if @url
-      render ({
-        json: {
-          data: @url,
-          status: "Success"
-        },
-        status: 200
-      })
-    else
-      render ({
-        json: {
-          status: "Url Not Found"
-        },
-        status: 404
-      })
-    end
-  end
-
   def create
     if !@url
       # puts "yayayayayaya"
