@@ -61,19 +61,20 @@ class UsersController < ApplicationController
   end
 
   def update
-    if current_user && current_user.authenticate(params[:current_password])
-      if current_user.update(user_params("update"))
+    @user = current_user
+    if @user && @user.authenticate(params[:current_password])
+      if @user.update(user_params("update"))
         render ({
           json: {
             message: "User updated successfully",
-            user: current_user
+            user: @user
           },
           status: 200
         })
       else
         render ({
           json: {
-            error: "Bad request"
+            error: @user.errors
           },
           status: 422 #unprocessable entity
         })
@@ -81,7 +82,7 @@ class UsersController < ApplicationController
     else
       render ({
         json: {
-          error: "Password is not correct, try again!"
+          error: { current_password: "Current password is not correct, try again!" }
         },
         status: 404
       })
