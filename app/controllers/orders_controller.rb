@@ -21,7 +21,11 @@ class OrdersController < ApplicationController
               message: order.message,
               products_order: ProductOrder.where(order_id: order.id),
               created_at: order.created_at,
-              updated_at: order.updated_at
+              updated_at: order.updated_at,
+              merchant_name: Merchant.find(order.merchant_id).merchant_name,
+              merchant_slug: Merchant.find(order.merchant_id).slug,
+              customer_name: Customer.find(order.customer_id).username,
+              customer_location: User.find(Customer.find(order.customer_id).user_id).location
             }
           end
         },
@@ -57,6 +61,38 @@ class OrdersController < ApplicationController
     end
   end
 
+  def check_delivered
+    if Order.find(params[:id]).time_acceptance
+      if Time.now.utc > (Order.find(params[:id]).time_acceptance.utc + 2.hours)
+        render ({
+          json: {
+            message: "Order delivered",
+            color: "green",
+            order_placed: Order.find(params[:id]).time_acceptance.localtime
+          }
+        }),
+        status: 200
+      else
+        render ({
+          json: {
+            message: "Your order is on the way",
+            color: "#f60",
+            order_placed: Order.find(params[:id]).time_acceptance.localtime,
+            estimated_arrival: Order.find(params[:id]).time_acceptance.localtime + 2.hours
+          }
+        }),
+        status: 200
+      end
+    else
+      render ({
+        json: {
+          error: "Not Found"
+        },
+        status: 404
+      })
+    end
+  end
+
   def create
     if current_user&.customer && params[:merchant_id]
       @order = Order.new(
@@ -64,6 +100,7 @@ class OrdersController < ApplicationController
         merchant_id: params[:merchant_id].to_i,
         accepted: false,
         canceled: false,
+        delivered: true,
         current_user: "merchant",
         delivery_fee: params[:delivery_fee],
         tip: params[:tip],
@@ -173,7 +210,7 @@ class OrdersController < ApplicationController
   private
 
     def order_params
-      params.require(:order).permit(:accepted, :canceled, :current_user, :tip, :message)
+      params.require(:order).permit(:accepted, :canceled, :current_user, :tip, :message, :time_acceptance)
     end
 
     def set_role
