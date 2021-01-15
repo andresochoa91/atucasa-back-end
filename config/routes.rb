@@ -48,6 +48,8 @@ Rails.application.routes.draw do
   put '/current_user/orders/:id', to: 'orders#update'
   delete '/current_user/orders/:id', to: 'orders#destroy'
 
+  get '/current_user/check_delivered/:id', to: 'orders#check_delivered'
+
   #Product Order Endpoints
   # get '/current_user/orders/:order_id/products_order', to: 'product_orders#index'
   # get '/current_user/orders/:order_id/products_order/:id', to: 'product_orders#show'

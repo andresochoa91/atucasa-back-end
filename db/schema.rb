@@ -78,6 +78,8 @@ ActiveRecord::Schema.define(version: 2021_01_13_203023) do
     t.integer "merchant_id"
     t.boolean "accepted"
     t.boolean "canceled"
+    t.boolean "delivered"
+    t.datetime "time_acceptance"
     t.text "message"
     t.string "current_user"
     t.float "tip"
