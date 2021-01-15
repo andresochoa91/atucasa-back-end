@@ -45,7 +45,7 @@ class UsersController < ApplicationController
       else
         render ({
           json: {
-            error: "Unable to create user"
+            error: @user.errors
           },
           status: 409
         })
@@ -53,7 +53,7 @@ class UsersController < ApplicationController
     else
       render ({
         json: {
-          error: "Unable to create user"
+          error: "User already logged"
         },
         status: 409
       })

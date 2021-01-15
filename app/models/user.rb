@@ -4,13 +4,13 @@ class User < ApplicationRecord
   has_one :merchant
   has_one :location
   validates_presence_of :email, :role
-  validates_uniqueness_of :email
+  validates_uniqueness_of :email, :message => "Email already taken"
 
   before_destroy :delete_user_customer_or_merchant_and_location
   after_create :create_merchant_or_customer_and_location
 
   validates :email,
-    format: { with: /\A(.+)@(.+)\z/, message: "Email invalid" },
+    format: { with: /\b[A-Z0-9._%a-z\-]+@(?:[A-Z0-9a-z\-]+\.)+[A-Za-z]{2,4}\z/, message: "Invalid Email" },
     uniqueness: { case_sensitive: false },
     length: 4..254
   
