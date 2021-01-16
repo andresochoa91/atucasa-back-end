@@ -66,13 +66,16 @@ class User < ApplicationRecord
       if role == "customer"
         @customer = Customer.new(
           username: user_slug,
-          slug: user_slug
+          slug: user_slug,
+          profile_picture: "https://firebasestorage.googleapis.com/v0/b/leaflet-react.appspot.com/o/user.png?alt=media&token=16764122-d2d8-4253-a7f3-c9b628c320bd"
         )
         self.customer = @customer
       else
         @merchant = Merchant.new(
           merchant_name: user_slug,
-          slug: user_slug
+          slug: user_slug,
+          profile_picture: "https://firebasestorage.googleapis.com/v0/b/leaflet-react.appspot.com/o/store_profile.png?alt=media&token=61728311-d9c5-4b90-92d8-e9ae26d910d5",
+          background_picture: "https://firebasestorage.googleapis.com/v0/b/leaflet-react.appspot.com/o/store_background.png?alt=media&token=a7e10022-6447-49d9-874e-b58a6c63d231"
         )
         self.merchant = @merchant
       end
