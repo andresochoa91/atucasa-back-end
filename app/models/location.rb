@@ -5,7 +5,7 @@ class Location < ApplicationRecord
   #   :presence => true,
   #   :on => :create
 
-  validates_length_of :country, 
+  validates_length_of :country, :state, :city,
     :minimum => 2,
     :allow_nil => true,
     :on => :update  
