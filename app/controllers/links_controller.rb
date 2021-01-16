@@ -55,7 +55,7 @@ class LinksController < ApplicationController
     else
       render ({
         json: {
-          error: "Unable to create link"
+          error: @link.errors
         },
         status: 409
       })
@@ -75,7 +75,7 @@ class LinksController < ApplicationController
       else
         render ({
           json: {
-            error: "Bad request"
+            error: @link.errors
           },
           status: 422 #unprocessable entity
         })
