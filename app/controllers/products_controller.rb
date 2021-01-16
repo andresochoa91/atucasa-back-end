@@ -55,7 +55,7 @@ class ProductsController < ApplicationController
     else
       render ({
         json: {
-          error: "Unable to create product"
+          error: @product.errors
         },
         status: 409
       })
@@ -76,7 +76,7 @@ class ProductsController < ApplicationController
       else
         render ({
           json: {
-            error: "Bad request"
+            error: @product.errors
           },
           status: 422 #unprocessable entity
         })

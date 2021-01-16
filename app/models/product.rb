@@ -19,12 +19,12 @@ class Product < ApplicationRecord
     on: :update
 
   validates :price,
-    numericality: { less_than: 1001 },
+    numericality: { less_than: 1001, greater_than: 0 },
     presence: true,
     on: :create
 
   validates :price,
-    numericality: { less_than: 1001 },
+    numericality: { less_than: 1001, greater_than: 0 },
     allow_nil: true,
     on: :update
 
@@ -33,7 +33,7 @@ class Product < ApplicationRecord
     on: :create
 
   validates :product_picture,
-    format: { with: /\Ahttps?:\/\/.{0,}/, message: "bad format" },
+    format: { with: /\Ahttps?:\/\/.{0,}/, message: "url should start with \"http://\" or \"https://\"" },
     allow_nil: true
 
 end
