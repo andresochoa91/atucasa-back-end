@@ -26,7 +26,8 @@ class OrdersController < ApplicationController
               merchant_slug: Merchant.find(order.merchant_id).slug,
               customer_name: Customer.find(order.customer_id).username,
               customer_picture: Customer.find(order.customer_id).profile_picture,
-              customer_location: User.find(Customer.find(order.customer_id).user_id).location
+              customer_location: User.find(Customer.find(order.customer_id).user_id).location,
+              customer_phone_number: Customer.find(order.customer_id).phone_number
             }
           end
         },
