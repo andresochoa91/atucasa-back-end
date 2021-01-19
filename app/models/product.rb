@@ -17,7 +17,8 @@ class Product < ApplicationRecord
     length: 2..400,
     allow_nil: true,
     allow_blank: true,
-    on: :update
+    on: :update,
+    on: :create
 
   validates :price,
     numericality: { less_than: 1001, greater_than: 0 },
@@ -35,8 +36,9 @@ class Product < ApplicationRecord
     on: :create
 
   validates :product_picture,
+    presence: true,
     format: { with: /\Ahttps?:\/\/.{0,}/, message: "url should start with \"http://\" or \"https://\"" },
-    allow_nil: true,
-    allow_blank: true
+    on: :update,
+    on: :create
 
 end
