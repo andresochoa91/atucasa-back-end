@@ -22,8 +22,6 @@ class CacheUrlsController < ApplicationController
 
   def create
     if !@url
-
-      puts "yayayayayaya"
       newUrl = CacheUrl.new({
         url: params[:url] ? params[:url] : params[:coordsUrl],
         strData: params[:strData]

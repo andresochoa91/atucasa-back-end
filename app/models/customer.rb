@@ -25,5 +25,3 @@ class Customer < ApplicationRecord
   
 end
 
-# /\A(.+)@(.+)\z/
-# /\A(+)@((?:[-a-z0-9]+\.)+[a-z]{2,})\z/i
