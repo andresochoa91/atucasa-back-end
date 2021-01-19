@@ -11,7 +11,7 @@ class Merchant < ApplicationRecord
     on: :update
 
   validates :phone_number,
-    format: { with: /\A\d{10}\z/, message: "bad format" },
+    format: { with: /\A\d{10}\z/, message: "Phone Number has a bad format. Ex: 3127894560" },
     allow_nil: true,
     on: :update
 
@@ -26,7 +26,7 @@ class Merchant < ApplicationRecord
     on: :update
 
   validates :profile_picture, :background_picture,
-    format: { with: /\Ahttps?:\/\/.{0,}/, message: "bad format" },
+    format: { with: /\Ahttps?:\/\/.{0,}/, message: "url should start with \"http://\" or \"https://\"" },
     allow_nil: true,
     on: :update
 
