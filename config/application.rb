@@ -25,6 +25,7 @@ module Atupuerta
     config.autoload_paths += %W( lib/ )
     config.api_only = true
     config.middleware.use ActionDispatch::Cookies
+    config.middleware.use ActionDispatch::Session::CookieStore
 
     config.action_controller.forgery_protection_origin_check = false
 
@@ -40,8 +41,9 @@ module Atupuerta
     end
 
     # config.action_dispatch.default_headers = {
-    #   'Access-Control-Allow-Origin' => 'https://localhost:3001',
-    #   'Access-Control-Request-Method' => %w{GET POST OPTIONS}.join(",")
+    #   # 'Access-Control-Allow-Origin' => 'https://localhost:3001',
+    #   # 'Access-Control-Request-Method' => %w{GET POST OPTIONS}.join(",")
+    #   "Access-Control-Expose-Headers": "Accept-Language"
     # }
 
   end
