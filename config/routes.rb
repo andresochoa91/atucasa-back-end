@@ -1,9 +1,8 @@
 Rails.application.routes.draw do
-  get 'cache_urls/show'
-  get 'cache_urls/create'
   # For details on the DSL available within this file, see https://guides.rubyonrails.org/routing.html
   resources :merchants, only: [:index, :show]
-  resources :users, only: [:show]
+  # resources :users, only: [:show]
+  resources :users
 
   #User Endpoints
   post '/signup', to: 'users#create'
