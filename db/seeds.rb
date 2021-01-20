@@ -33,25 +33,25 @@ users = User.create([
   # }
 ])
 
-products = Product.create([
-  {
-    product_name: "Vanilla Ice-cream", 
-    category: "Ice-cream", 
-    description: "Great!",
-    price: 2, 
-    tax: 2 * 0.09,
-    available: true,
-    merchant_id: 1
-  },
-  {
-    product_name: "Raspberries", 
-    category: "Fruits",
-    description: "Amazing!",
-    price: 3, 
-    tax: 3 * 0.09,
-    available: false,
-    merchant_id: 1
-  },
+# products = Product.create([
+#   {
+#     product_name: "Vanilla Ice-cream", 
+#     category: "Ice-cream", 
+#     description: "Great!",
+#     price: 2, 
+#     tax: 2 * 0.09,
+#     available: true,
+#     merchant_id: 1
+#   },
+#   {
+#     product_name: "Raspberries", 
+#     category: "Fruits",
+#     description: "Amazing!",
+#     price: 3, 
+#     tax: 3 * 0.09,
+#     available: false,
+#     merchant_id: 1
+#   },
   # {
   #   product_name: "Chocolate bar", 
   #   category: "Sweets",
@@ -70,19 +70,19 @@ products = Product.create([
   #   available: false,
   #   merchant_id: 2
   # }
-])
+# ])
 
-links = Link.create([
-  {
-    site_name: "Facebook",
-    url: "https://www.facebook.com",
-    merchant_id: 1
-  },
-  {
-    site_name: "Twitter",
-    url: "https://www.twitter.com",
-    merchant_id: 1
-  },
+# links = Link.create([
+#   {
+#     site_name: "Facebook",
+#     url: "https://www.facebook.com",
+#     merchant_id: 1
+#   },
+#   {
+#     site_name: "Twitter",
+#     url: "https://www.twitter.com",
+#     merchant_id: 1
+#   },
   # {
   #   site_name: "Facebook",
   #   url: "https://www.facebook.com",
@@ -93,19 +93,19 @@ links = Link.create([
   #   url: "https://www.twitter.com",
   #   merchant_id: 2
   # }
-])
+# ])
 
-orders = Order.create([
-  {
-    customer_id: 1,
-    merchant_id: 1,
-    accepted: false,
-    canceled: false,
-    current_user: "merchant",
-    tip: 10,
-    delivery_fee: 5,
-    message: ""
-  },
+# orders = Order.create([
+#   {
+#     customer_id: 1,
+#     merchant_id: 1,
+#     accepted: false,
+#     canceled: false,
+#     current_user: "merchant",
+#     tip: 10,
+#     delivery_fee: 5,
+#     message: ""
+#   },
   # {
   #   customer_id: 2,
   #   merchant_id: 1,
@@ -136,27 +136,27 @@ orders = Order.create([
   #   delivery_fee: 5,
   #   message: ""
   # }
-])
+# ])
 
-product_orders = ProductOrder.create([
-  {
-    product_id: 1,
-    order_id: 1,
-    product_name: Product.find(1).product_name,
-    price: Product.find(1).price,
-    tax: Product.find(1).tax,
-    amount: 1,
-    available: true
-  },
-  {
-    product_id: 2,
-    order_id: 1,
-    product_name: Product.find(2).product_name,
-    price: Product.find(2).price,
-    tax: Product.find(2).tax,
-    amount: 2,
-    available: true
-  },
+# product_orders = ProductOrder.create([
+#   {
+#     product_id: 1,
+#     order_id: 1,
+#     product_name: Product.find(1).product_name,
+#     price: Product.find(1).price,
+#     tax: Product.find(1).tax,
+#     amount: 1,
+#     available: true
+#   },
+#   {
+#     product_id: 2,
+#     order_id: 1,
+#     product_name: Product.find(2).product_name,
+#     price: Product.find(2).price,
+#     tax: Product.find(2).tax,
+#     amount: 2,
+#     available: true
+#   },
   # {
   #   product_id: 3,
   #   order_id: 3,
@@ -175,5 +175,5 @@ product_orders = ProductOrder.create([
   #   amount: 1,
   #   available: true
   # }
-])
+# ])
 
