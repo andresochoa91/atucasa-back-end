@@ -23,7 +23,7 @@ module Atupuerta
   class Application < Rails::Application
     config.load_defaults 6.0
     config.autoload_paths += %W( lib/ )
-    config.api_only = true
+    config.api_only = false
     config.middleware.use ActionDispatch::Cookies
 
     config.action_controller.forgery_protection_origin_check = false
