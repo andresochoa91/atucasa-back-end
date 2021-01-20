@@ -23,7 +23,7 @@ module Atupuerta
   class Application < Rails::Application
     config.load_defaults 6.0
     config.autoload_paths += %W( lib/ )
-    config.api_only = false
+    config.api_only = true
     config.middleware.use ActionDispatch::Cookies
 
     config.action_controller.forgery_protection_origin_check = false
@@ -33,6 +33,7 @@ module Atupuerta
         origins 'http://localhost:3001'
         resource '*', 
           headers: :any,
+          expose: ["Content-Range"],
           methods: [:get, :post, :put, :patch, :delete, :options, :head],
           credentials: true
       end
