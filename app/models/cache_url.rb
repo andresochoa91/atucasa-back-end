@@ -1,8 +1,8 @@
 class CacheUrl < ApplicationRecord
 
-  validates_presence_of :url, :strData  
+  validates_presence_of :url, :stringified_data  
   
-  validates :url, :strData,
+  validates :url, :stringified_data,
     length: { minimum: 2 }
 
 end

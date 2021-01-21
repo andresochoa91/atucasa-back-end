@@ -17,7 +17,7 @@ ActiveRecord::Schema.define(version: 2021_01_13_203023) do
 
   create_table "cache_urls", force: :cascade do |t|
     t.text "url"
-    t.text "strData"
+    t.text "stringified_data"
     t.datetime "created_at", precision: 6, null: false
     t.datetime "updated_at", precision: 6, null: false
   end

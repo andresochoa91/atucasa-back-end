@@ -23,8 +23,8 @@ class CacheUrlsController < ApplicationController
   def create
     if !@url
       newUrl = CacheUrl.new({
-        url: params[:url] ? params[:url] : params[:coordsUrl],
-        strData: params[:strData]
+        url: params[:url] ? params[:url] : params[:coords_url],
+        stringified_data: params[:stringified_data]
       })
       
       if newUrl.save
@@ -55,7 +55,7 @@ class CacheUrlsController < ApplicationController
   private
 
     def set_url
-      @url = CacheUrl.find_by(url: (params[:url] || params[:coordsUrl]))
+      @url = CacheUrl.find_by(url: (params[:url] || params[:coords_url]))
     end     
 
     def url_params
