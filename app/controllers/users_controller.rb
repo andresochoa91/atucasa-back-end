@@ -61,9 +61,9 @@ class UsersController < ApplicationController
   end
 
   def update
-    @user = current_user
-    if @user && @user.authenticate(params[:current_password])
-      # @user = User.find(params[:id])
+    # @user = current_user
+    # if @user && @user.authenticate(params[:current_password])
+      @user = User.find(params[:id])
       if @user.update(user_params("update"))
         render ({
           json: {
@@ -80,14 +80,14 @@ class UsersController < ApplicationController
           status: 422 #unprocessable entity
         })
       end
-    else
-      render ({
-        json: {
-          error: { current_password: "Current password is not correct, try again!" }
-        },
-        status: 404
-      })
-    end
+    # else
+    #   render ({
+    #     json: {
+    #       error: { current_password: "Current password is not correct, try again!" }
+    #     },
+    #     status: 404
+    #   })
+    # end
   end
 
   def destroy
