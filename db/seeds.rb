@@ -1,10 +1,10 @@
-# # This file should contain all the record creation needed to seed the database with its default values.
-# # The data can then be loaded with the rails db:seed command (or created alongside the database with db:setup).
-# #
-# # Examples:
-# #
-# #   movies = Movie.create([{ name: 'Star Wars' }, { name: 'Lord of the Rings' }])
-# #   Character.create(name: 'Luke', movie: movies.first)
+# This file should contain all the record creation needed to seed the database with its default values.
+# The data can then be loaded with the rails db:seed command (or created alongside the database with db:setup).
+#
+# Examples:
+#
+#   movies = Movie.create([{ name: 'Star Wars' }, { name: 'Lord of the Rings' }])
+#   Character.create(name: 'Luke', movie: movies.first)
 
 # users = User.create([
 #   # {
@@ -838,7 +838,7 @@ products = Product.create([
     price: 5, 
     tax: 5 * 0.09,
     available: true,
-    merchant_id: 12,
+    merchant_id: 11,
     product_picture: "https://external-content.duckduckgo.com/iu/?u=https%3A%2F%2Ftse1.mm.bing.net%2Fth%3Fid%3DOIP.elwtoYx_p6OkMV-YaBoVywHaEn%26pid%3DApi&f=1"
   },
   {
@@ -847,7 +847,7 @@ products = Product.create([
     price: 5, 
     tax: 5 * 0.09,
     available: true,
-    merchant_id: 12,
+    merchant_id: 11,
     product_picture: "https://cdn.shopify.com/s/files/1/2154/4937/products/Raspberry600x600_2_77ec1ec1-b919-4185-a86c-4b01ec964dc0_600x.jpg?v=1610541468"
   },
   {
@@ -856,7 +856,7 @@ products = Product.create([
     price: 2, 
     tax: 2 * 0.09,
     available: true,
-    merchant_id: 12,
+    merchant_id: 11,
     product_picture: "https://www.cartpk.com/media/catalog/product/cache/fc389275de9b28a1aa3797e29c004adb/b/a/banana_kela_large_dozen_1.jpg" 
   },
   {
@@ -865,7 +865,7 @@ products = Product.create([
     price: 6, 
     tax: 6 * 0.09,
     available: true,
-    merchant_id: 12,
+    merchant_id: 11,
     product_picture: "https://www.cashgolosinas.com/4650-large_default/organic-coffee-in-juan-valdez-grain.jpg" 
   },
   {
@@ -874,7 +874,7 @@ products = Product.create([
     price: 8, 
     tax: 8 * 0.09,
     available: true,
-    merchant_id: 12,
+    merchant_id: 11,
     product_picture: "https://encrypted-tbn0.gstatic.com/images?q=tbn:ANd9GcQInkCJlkcBNKhLnQdTqdE0re_l8CWzHXbiGKF4XAxhARDIMrnJVNIvrJIvRmM&usqp=CAc" 
   },
   {
@@ -883,7 +883,7 @@ products = Product.create([
     price: 2, 
     tax: 2 * 0.09,
     available: true,
-    merchant_id: 12,
+    merchant_id: 11,
     product_picture: "https://www.meijer.com/content/dam/meijer/product/0004/90/0000/46/0004900000463_1_A1C1_1200.png" 
   },
   {
@@ -892,7 +892,7 @@ products = Product.create([
     price: 7, 
     tax: 7 * 0.09,
     available: true,
-    merchant_id: 12,
+    merchant_id: 11,
     product_picture: "https://d2d8wwwkmhfcva.cloudfront.net/800x/d2lnr5mha7bycj.cloudfront.net/product-image/file/large_1ac49425-e2de-416c-8620-9be9605107df.jpeg" 
   },
   {
@@ -901,7 +901,7 @@ products = Product.create([
     price: 4, 
     tax: 4 * 0.09,
     available: true,
-    merchant_id: 12,
+    merchant_id: 11,
     product_picture: "https://hips.hearstapps.com/hmg-prod.s3.amazonaws.com/images/whole-and-sliced-avocado-on-wood-royalty-free-image-961101662-1545068511.jpg" 
   }
 ])
