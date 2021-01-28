@@ -37,13 +37,8 @@ class User < ApplicationRecord
     if user&.authenticate(password)
       user_info = Hash.new
       user_info[:token] = CoreModules::JsonWebToken.encode({
-        user_id: user.id,
-        email: user.email,
-        role: user.role
+        user_id: user.id
       }, 4.hours.from_now)
-      user_info[:user_id] = user.id
-      user_info[:email] = user.email
-      user_info[:role] = user.role
       return user_info
     else
       return false

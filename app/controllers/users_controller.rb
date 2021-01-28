@@ -5,15 +5,24 @@ class UsersController < ApplicationController
       render ({
         json: {
           message: "Success",
-          user: current_user
+          user: {
+            id: current_user.id,
+            email: current_user.email,
+            role: current_user.role
+          }
         },
         status: 200
       })
     elsif (params[:id])
+      @user = User.find(params[:id])
       render ({
         json: {
           message: "Success",
-          user: User.find(params[:id])
+          user: {
+            id: @user.id,
+            email: @user.email,
+            role: @user.role
+          }
         },
         status: 200
       })
@@ -33,7 +42,6 @@ class UsersController < ApplicationController
       if @user.save
         
         login_hash = User.handle_login(params[:email], params[:password])
-        # cookies.signed[:jwt] = {value: login_hash[:token], httponly: true}
 
         render ({
           json: {
