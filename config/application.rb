@@ -24,7 +24,7 @@ module Atupuerta
     config.load_defaults 6.0
     config.autoload_paths += %W( lib/ )
     config.api_only = true
-    config.middleware.use ActionDispatch::Cookies
+    # config.middleware.use ActionDispatch::Cookies
 
     config.action_controller.forgery_protection_origin_check = false
 

@@ -78,6 +78,8 @@ class MerchantsController < ApplicationController
   end
 
   def show_merchant_data
+    puts "yayayayayayayayayayayayayayaya"
+    puts current_user
     if current_user&.role == "merchant"
       render ({
         json: {
