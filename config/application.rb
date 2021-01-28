@@ -38,10 +38,11 @@ module Atupuerta
       end
     end
 
-    # config.action_dispatch.default_headers = {
-    #   'Access-Control-Allow-Origin' => 'https://localhost:3001',
-    #   'Access-Control-Request-Method' => %w{GET POST OPTIONS}.join(",")
-    # }
+    config.action_dispatch.default_headers = {
+      'Access-Control-Allow-Origin' => '*',
+      'Access-Control-Request-Method' => 'GET, PATCH, PUT, POST, OPTIONS, DELETE',
+      'Access-Control-Allow-Headers:' => 'Origin, X-Requested-With, Content-Type, Accept, Authorization'
+    }
 
   end
 end
