@@ -38,7 +38,7 @@ class User < ApplicationRecord
       user_info = Hash.new
       user_info[:token] = CoreModules::JsonWebToken.encode({
         user_id: user.id
-      }, 4.hours.from_now)
+      }, 24.hours.from_now)
       return user_info
     else
       return false
