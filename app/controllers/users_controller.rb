@@ -5,15 +5,24 @@ class UsersController < ApplicationController
       render ({
         json: {
           message: "Success",
-          user: current_user
+          user: {
+            id: current_user.id,
+            email: current_user.email,
+            role: current_user.role
+          }
         },
         status: 200
       })
     elsif (params[:id])
+      @user = User.find(params[:id])
       render ({
         json: {
           message: "Success",
-          user: User.find(params[:id])
+          user: {
+            id: @user.id,
+            email: @user.email,
+            role: @user.role
+          }
         },
         status: 200
       })
@@ -31,9 +40,8 @@ class UsersController < ApplicationController
     if !current_user
       @user = User.new(user_params("create"))
       if @user.save
-  
+        
         login_hash = User.handle_login(params[:email], params[:password])
-        cookies.signed[:jwt] = {value: login_hash[:token], httponly: true}
 
         render ({
           json: {
@@ -90,35 +98,35 @@ class UsersController < ApplicationController
     end
   end
 
-  def destroy
-    if (current_user.id == @user.id)
-      cookies.delete(:jwt)
+  # def destroy
+  #   if (current_user.id == @user.id)
+  #     cookies.delete(:jwt)
   
-      if @user.destroy
-        render ({
-          json: {
-            message: "User deleted successfully",
-            user: @user
-          },
-          status: 200
-        })
-      else
-        render ({
-          json: {
-            error: "Unable to delete user"
-          },
-          status: 401 #unauthorized 
-        })
-      end
-    else
-      render ({
-        json: {
-          error: "Unable to delete user"
-        },
-        status: 401 #unauthorized 
-      })
-    end
-  end
+  #     if @user.destroy
+  #       render ({
+  #         json: {
+  #           message: "User deleted successfully",
+  #           user: @user
+  #         },
+  #         status: 200
+  #       })
+  #     else
+  #       render ({
+  #         json: {
+  #           error: "Unable to delete user"
+  #         },
+  #         status: 401 #unauthorized 
+  #       })
+  #     end
+  #   else
+  #     render ({
+  #       json: {
+  #         error: "Unable to delete user"
+  #       },
+  #       status: 401 #unauthorized 
+  #     })
+  #   end
+  # end
 
   private
 
