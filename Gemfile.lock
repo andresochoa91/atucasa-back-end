@@ -57,7 +57,6 @@ GEM
       tzinfo (~> 1.1)
       zeitwerk (~> 2.2, >= 2.2.2)
     bcrypt (3.1.16)
-    bcrypt (3.1.16-java)
     bootsnap (1.6.0)
       msgpack (~> 1.0)
     builder (3.2.4)
@@ -67,9 +66,6 @@ GEM
     diff-lcs (1.4.4)
     erubi (1.10.0)
     ffi (1.14.2)
-    ffi (1.14.2-java)
-    ffi (1.14.2-x64-mingw32)
-    ffi (1.14.2-x86-mingw32)
     globalid (0.4.2)
       activesupport (>= 4.2.0)
     i18n (1.8.7)
@@ -91,29 +87,14 @@ GEM
     mini_portile2 (2.5.0)
     minitest (5.14.3)
     msgpack (1.4.1)
-    msgpack (1.4.1-java)
     nio4r (2.5.4)
-    nio4r (2.5.4-java)
     nokogiri (1.11.1)
       mini_portile2 (~> 2.5.0)
       racc (~> 1.4)
-    nokogiri (1.11.1-java)
-      racc (~> 1.4)
-    nokogiri (1.11.1-x64-mingw32)
-      racc (~> 1.4)
-    nokogiri (1.11.1-x86-mingw32)
-      racc (~> 1.4)
-    nokogiri (1.11.1-x86_64-darwin)
-      racc (~> 1.4)
     pg (1.2.3)
-    pg (1.2.3-x64-mingw32)
-    pg (1.2.3-x86-mingw32)
     puma (4.3.7)
       nio4r (~> 2.0)
-    puma (4.3.7-java)
-      nio4r (~> 2.0)
     racc (1.5.2)
-    racc (1.5.2-java)
     rack (2.2.3)
     rack-cors (1.1.1)
       rack (>= 2.0.0)
@@ -182,26 +163,16 @@ GEM
       sprockets (>= 3.0.0)
     thor (1.1.0)
     thread_safe (0.3.6)
-    thread_safe (0.3.6-java)
     tzinfo (1.2.9)
       thread_safe (~> 0.1)
-    tzinfo-data (1.2021.1)
-      tzinfo (>= 1.0.0)
     user_agent_parser (2.7.0)
     websocket-driver (0.7.3)
-      websocket-extensions (>= 0.1.0)
-    websocket-driver (0.7.3-java)
       websocket-extensions (>= 0.1.0)
     websocket-extensions (0.1.5)
     zeitwerk (2.4.2)
 
 PLATFORMS
-  java
   ruby
-  x64-mingw32
-  x86-mingw32
-  x86-mswin32
-  x86_64-darwin-19
 
 DEPENDENCIES
   bcrypt (~> 3.1.7)
@@ -220,7 +191,7 @@ DEPENDENCIES
   tzinfo-data
 
 RUBY VERSION
-   ruby 2.7.0p0
+   ruby 2.7.2p137
 
 BUNDLED WITH
-   2.2.6
+   2.1.4
