@@ -30,7 +30,7 @@ module Atupuerta
 
     config.middleware.insert_before 0, Rack::Cors, debug: true do
       allow do
-        origins 'https://atucasa.netlify.app/', 'localhost:3001', 'localhost:3000'
+        origins 'https://atucasa.netlify.app', 'localhost:3001', 'localhost:3000', 'https://atucasa-frontend.herokuapp.com' 
         resource '*', 
           headers: :any,
           methods: [:get, :post, :put, :patch, :delete, :options, :head],
