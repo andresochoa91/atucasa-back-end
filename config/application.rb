@@ -26,24 +26,25 @@ module Atupuerta
     config.api_only = true
     # config.middleware.use ActionDispatch::Cookies
 
-    config.action_controller.forgery_protection_origin_check = false
+    # config.action_controller.forgery_protection_origin_check = false
 
     config.middleware.insert_before 0, Rack::Cors, debug: true do
       allow do
         origins 'https://atucasa.netlify.app', 'localhost:3001', 'localhost:3000', 'https://atucasa-frontend.herokuapp.com' 
         resource '*', 
           headers: :any,
+          expose: 'Authorization',
           methods: [:get, :post, :put, :patch, :delete, :options, :head],
           credentials: true
       end
     end
 
-    config.action_dispatch.default_headers = {
-      # 'Access-Control-Allow-Origin' => 'https://atucasa-frontend.herokuapp.com',
-      'Access-Control-Allow-Origin' => 'https://atucasa.netlify.app',
-      'Access-Control-Request-Method' => 'GET, PATCH, PUT, POST, OPTIONS, DELETE',
-      'Access-Control-Allow-Headers:' => 'Origin, X-Requested-With, Content-Type, Accept, Authorization'
-    }
+    # config.action_dispatch.default_headers = {
+    #   # 'Access-Control-Allow-Origin' => 'https://atucasa-frontend.herokuapp.com',
+    #   'Access-Control-Allow-Origin' => 'https://atucasa.netlify.app',
+    #   'Access-Control-Request-Method' => 'GET, PATCH, PUT, POST, OPTIONS, DELETE',
+    #   'Access-Control-Allow-Headers:' => 'Origin, X-Requested-With, Content-Type, Accept, Authorization'
+    # }
 
   end
 end

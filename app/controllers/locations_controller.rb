@@ -1,26 +1,22 @@
 class LocationsController < ApplicationController
 
   before_action :set_location
+  skip_before_action :authenticate_cookie, only: :show
 
   def show
     # key_name = use_new_name ? "new name" : "old name"
-    if current_user
-      render ({
-        json: {
-          message: "Success",
-          location: @location
-          # key_name => true
-        },
-        status: 200
-      })
-    else
-      render ({
-        json: {
-          error: "Not Found",
-        },
-        status: 404  
-      })
-    end
+    # if current_user
+    render ({
+      json: {
+        message: "Success",
+        location: @location
+        # key_name => true
+      },
+      status: 200
+    })
+    # else
+    #   render json: { error: "Not Found" }, status: 404  
+    # end
   end
 
   def update
@@ -34,12 +30,7 @@ class LocationsController < ApplicationController
         status: 200
       })
     else
-      render ({
-        json: {
-          error: "Unable to update user",
-        },
-        status: 401 #unauthorized 
-      })
+      render json: { error: "Unable to update user" }, status: 401 #unauthorized 
     end
   end
 

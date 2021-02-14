@@ -78,8 +78,6 @@ class MerchantsController < ApplicationController
   end
 
   def show_merchant_data
-    puts "yayayayayayayayayayayayayayaya"
-    puts current_user
     if current_user&.role == "merchant"
       render ({
         json: {
@@ -89,12 +87,7 @@ class MerchantsController < ApplicationController
         status: 200
       })
     else
-      render ({
-        json: {
-          error: "Bad request"
-        },
-        status: 422 #unprocessable entity
-      })
+      render json: { error: "Bad request" }, status: 422 #unprocessable entity
     end
   end
 
@@ -119,12 +112,7 @@ class MerchantsController < ApplicationController
         status: 200
       })
     else
-      render ({
-        json: {
-          error: @merchant.errors
-        },
-        status: 422 #unprocessable entity
-      })
+      render json: { error: @merchant.errors }, status: 422 #unprocessable entity
     end
   end
 

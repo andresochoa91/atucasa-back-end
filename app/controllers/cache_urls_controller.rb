@@ -11,12 +11,7 @@ class CacheUrlsController < ApplicationController
         status: 200
       })
     else
-      render ({
-        json: {
-          status: "Url Not Found"
-        },
-        status: 404
-      })
+      render json: { status: "Url Not Found" }, status: 404
     end
   end
 
@@ -28,27 +23,12 @@ class CacheUrlsController < ApplicationController
       })
       
       if newUrl.save
-        render ({
-          json: {
-            data: newUrl
-          },
-          status: 404
-        })
+        render json: { data: newUrl }, status: 404
       else
-        render ({
-          json: {
-            error: "Unable to create url"
-          },
-          status: 404
-        })
+        render json: { error: "Unable to create url" }, status: 404
       end
     else
-      render ({
-        json: {
-          status: "Url already in Cache"
-        },
-        status: 404
-      })
+      render json: { status: "Url already in Cache" }, status: 404
     end 
   end
 

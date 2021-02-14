@@ -9,7 +9,7 @@ Rails.application.routes.draw do
   #User Endpoints
   post '/signup', to: 'users#create'
   post '/login', to: 'sessions#create'
-  delete '/logout', to: 'sessions#destroy'
+  # delete '/logout', to: 'sessions#destroy'
   get '/current_user', to: 'users#show'
   put '/current_user/update', to: 'users#update'
 

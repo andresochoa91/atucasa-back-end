@@ -22,12 +22,7 @@ class CustomersController < ApplicationController
         status: 200
       })
     else
-      render ({
-        json: {
-          error: "Bad request"
-        },
-        status: 422 #unprocessable entity
-      })
+      render json: { error: "Bad request" }, status: 422 #unprocessable entity
     end
   end
 
@@ -52,12 +47,7 @@ class CustomersController < ApplicationController
         status: 200
       })
     else
-      render ({
-        json: {
-          error: @customer.errors
-        },
-        status: 422 #unprocessable entity
-      })
+      render json: { error: @customer.errors }, status: 422 #unprocessable entity
     end
   end
 

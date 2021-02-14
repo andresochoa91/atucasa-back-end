@@ -34,12 +34,7 @@ class OrdersController < ApplicationController
         status: 200
       })
     else
-      render ({
-        json: {
-          error: "Not Found"
-        },
-        status: 404
-      })
+      render json: { error: "Not Found" }, status: 404
     end
   end
   
@@ -54,12 +49,7 @@ class OrdersController < ApplicationController
         status: 200
       })
     else
-      render ({
-        json: {
-          error: "Not Found"
-        },
-        status: 404
-      })
+      render json: { error: "Not Found" }, status: 404
     end
   end
 
@@ -86,12 +76,7 @@ class OrdersController < ApplicationController
         status: 200
       end
     else
-      render ({
-        json: {
-          error: "Not Found"
-        },
-        status: 404
-      })
+      render json: { error: "Not Found" }, status: 404
     end
   end
 
@@ -144,20 +129,10 @@ class OrdersController < ApplicationController
           status: 200
         })
       else
-        render ({
-          json: {
-            message: "Unable to create order"
-          },
-          status: 409
-        })
+        render json: { message: "Unable to create order" }, status: 409
       end
     else 
-      render ({
-        json: {
-          message: "Not Found"
-        },
-        status: 404
-      })
+      render json: { message: "Not Found" }, status: 404
     end
   end
 
@@ -172,12 +147,7 @@ class OrdersController < ApplicationController
         status: 200
       })
     else
-      render ({
-        json: {
-          error: "Bad request"
-        },
-        status: 422 #unprocessable entity
-      })
+      render json: { error: "Bad request" }, status: 422 #unprocessable entity
     end
   end
 
@@ -192,20 +162,10 @@ class OrdersController < ApplicationController
           status: 200
         })
       else
-        render ({
-          json: {
-            error: "Bad request"
-          },
-          status: 422 #unprocessable entity
-        })
+        render json: { error: "Bad request" }, status: 422 #unprocessable entity
       end
     else
-      render ({
-        json: {
-          error: "Merchants are not allowed to delete orders"
-        },
-        status: 403 #Forbidden
-      })
+      render json: { error: "Merchants are not allowed to delete orders" }, status: 403 #Forbidden
     end
   end
 

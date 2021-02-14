@@ -13,12 +13,7 @@ class LinksController < ApplicationController
         status: 200
       })
     else
-      render ({
-        json: {
-          error: "Not Found",
-        },
-        status: 404
-      })
+      render json: { error: "Not Found" }, status: 404
     end
   end
 
@@ -32,12 +27,7 @@ class LinksController < ApplicationController
         status: 200
       })
     else
-      render ({
-        json: {
-          error: "Not Found",
-        },
-        status: 404
-      })
+      render json: { error: "Not Found" }, status: 404
     end
   end
 
@@ -53,12 +43,7 @@ class LinksController < ApplicationController
         status: 200
       })
     else
-      render ({
-        json: {
-          error: @link.errors
-        },
-        status: 409
-      })
+      render json: { error: @link.errors }, status: 409
     end
   end
 
@@ -73,20 +58,10 @@ class LinksController < ApplicationController
           status: 200
         })
       else
-        render ({
-          json: {
-            error: @link.errors
-          },
-          status: 422 #unprocessable entity
-        })
+        render json: { error: @link.errors }, status: 422 #unprocessable entity
       end
     else
-      render ({
-        json: {
-          error: "Bad request"
-        },
-        status: 422 #unprocessable entity
-      })
+      render json: { error: "Bad request" }, status: 422 #unprocessable entity
     end
   end
 
@@ -101,20 +76,10 @@ class LinksController < ApplicationController
           status: 200
         })
       else
-        render ({
-          json: {
-            error: "Unable to delete link"
-          },
-          status: 401 #unauthorized 
-        })
+        render json: { error: "Unable to delete link" }, status: 401 #unauthorized 
       end
     else
-      render ({
-        json: {
-          error: "Bad request"
-        },
-        status: 422 #unprocessable entity
-      })
+      render json: { error: "Bad request" }, status: 422 #unprocessable entity
     end
   end
 
