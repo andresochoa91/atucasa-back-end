@@ -32,12 +32,7 @@ class ProductOrdersController < ApplicationController
         status: 200
       })
     else
-      render ({
-        json: {
-          error: "Not Found"
-        },
-        status: 404
-      })
+      render json: { error: "Not Found" }, status: 404
     end
   end
 
@@ -51,12 +46,7 @@ class ProductOrdersController < ApplicationController
         status: 200
       })
     else
-      render ({
-        json: {
-          error: "Bad request"
-        },
-        status: 422 #unprocessable entity
-      })
+      render json: { error: "Bad request" }, status: 422 #unprocessable entity
     end
   end
 
@@ -70,12 +60,7 @@ class ProductOrdersController < ApplicationController
         status: 200
       })
     else
-      render ({
-        json: {
-          error: "Bad request"
-        },
-        status: 422 #unprocessable entity
-      })
+      render json: { error: "Bad request" }, status: 422 #unprocessable entity
     end
   end
 

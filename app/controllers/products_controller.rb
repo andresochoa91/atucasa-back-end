@@ -12,12 +12,7 @@ class ProductsController < ApplicationController
         status: 200
       })
     else
-      render ({
-        json: {
-          error: "Not Found",
-        },
-        status: 404
-      })
+      render json: { error: "Not Found" }, status: 404
     end
   end
 
@@ -31,12 +26,7 @@ class ProductsController < ApplicationController
         status: 200
       })
     else
-      render ({
-        json: {
-          error: "Not Found",
-        },
-        status: 404
-      })
+      render json: { error: "Not Found" }, status: 404
     end
   end
 
@@ -53,12 +43,7 @@ class ProductsController < ApplicationController
         status: 200
       })
     else
-      render ({
-        json: {
-          error: @product.errors
-        },
-        status: 409
-      })
+      render json: { error: @product.errors }, status: 409
     end
   end
 
@@ -74,20 +59,10 @@ class ProductsController < ApplicationController
           status: 200
         })
       else
-        render ({
-          json: {
-            error: @product.errors
-          },
-          status: 422 #unprocessable entity
-        })
+        render json: { error: @product.errors }, status: 422 #unprocessable entity
       end
     else
-      render ({
-        json: {
-          error: "Bad request"
-        },
-        status: 422 #unprocessable entity
-      })
+      render json: { error: "Bad request" }, status: 422 #unprocessable entity
     end
   end
 
@@ -102,20 +77,10 @@ class ProductsController < ApplicationController
           status: 200
         })
       else
-        render ({
-          json: {
-            error: "Unable to delete product"
-          },
-          status: 401 #unauthorized 
-        })
+        render json: { error: "Unable to delete product" }, status: 401 #unauthorized 
       end
     else
-      render ({
-        json: {
-          error: "Bad request"
-        },
-        status: 422 #unprocessable entity
-      })
+      render json: { error: "Bad request" }, status: 422 #unprocessable entity
     end
   end
 
