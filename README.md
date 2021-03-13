@@ -1,24 +1,28 @@
 # README
 
-This README would normally document whatever steps are necessary to get the
-application up and running.
+API serving atucasa-front-end.
 
-Things you may want to cover:
+Set up for Linux and Mac:
 
-* Ruby version
+* Update to Ruby 2.6.5
+  * If using rvm: 
+    * `rvm install 2.6.5`
+    * `rvm use 2.6.5`
+  * If using rbenv:
+    * `rbenv install 2.6.5`
+    * `rbenv local 2.6.5`
 
-* System dependencies
+* Set up gems:
+`bundle install`
 
-* Configuration
+* Create PostgreSQL database:
+`rails db:create`
 
-* Database creation
+* Run migrations:
+`rails db:migrate`
 
-* Database initialization
+* Fill up data base with seeds:
+`rails db:seed`
 
-* How to run the test suite
-
-* Services (job queues, cache servers, search engines, etc.)
-
-* Deployment instructions
-
-* ...
+* Run server:
+`rails s`
