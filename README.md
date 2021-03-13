@@ -4,13 +4,13 @@ API serving atucasa-front-end.
 
 Set up for Linux and Mac:
 
-* Update to Ruby 2.6.5
+* Update to Ruby 2.7.2
   * If using rvm: 
-    * `rvm install 2.6.5`
-    * `rvm use 2.6.5`
+    * `rvm install 2.7.2`
+    * `rvm use 2.7.2`
   * If using rbenv:
-    * `rbenv install 2.6.5`
-    * `rbenv local 2.6.5`
+    * `rbenv install 2.7.2`
+    * `rbenv local 2.7.2`
 
 * Set up gems:
 `bundle install`
