@@ -94,19 +94,6 @@ class OrdersController < ApplicationController
         message: ""
       )
       if @order.save
-
-        #This is receiving a hash from the front-end. Ex:
-        # "products": [
-        #   {
-        #     "id": 1,
-        #     "amount": 2
-        #   },
-        #   {
-        #     "id": 2,
-        #     "amount": 3
-        #   },
-        # ]
-
         params[:products].each do |product|
           new_product = ProductOrder.new(
             product_id: product[:id],
